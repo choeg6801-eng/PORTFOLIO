@@ -1,0 +1,991 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>최가은 | 무역 AX 포트폴리오</title>
+<meta name="title-en" content="Gaeun Choi | Trade AX Portfolio">
+<meta name="description" content="해외영업 지원자 최가은의 무역 AX 포트폴리오 — 해외영업 반복 업무를 줄이는 업무 도구 모음">
+<!-- 공유 미리보기 (실습 18): 배포 후 og:image 를 https://내주소/images/og.jpg 처럼 전체 주소로 바꾸면 카톡에서도 그림이 뜹니다 -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="최가은 | 무역 AX 포트폴리오">
+<meta property="og:description" content="현장을 겪어본 해외영업, AI로 도구를 만듭니다 — 입찰서 검토 · 바이어 확인 · 단가 비교">
+<meta property="og:image" content="images/og.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%8F%3C/text%3E%3C/svg%3E">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 16px);-webkit-text-size-adjust:100%}
+body{margin:0;font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,sans-serif;font-size:16px;line-height:1.7;word-break:keep-all;overflow-x:hidden;background:var(--bg);color:var(--ink)}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--mint);outline-offset:2px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 28px}
+section{padding:104px 0}
+h2{margin:0;line-height:1.3;letter-spacing:-.02em}
+.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px 32px;margin-bottom:44px}
+.sec-head p{margin:0;max-width:520px;color:var(--sub)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 22px;border-radius:var(--btn-r,999px);font:inherit;font-size:15px;font-weight:700;text-decoration:none;cursor:pointer;border:1.5px solid transparent;transition:background-color .2s,color .2s,border-color .2s}
+.btn.is-off{opacity:.55;cursor:default}
+/* 이미지 자리 */
+.ph{position:relative;overflow:hidden;background:var(--ph-bg,#E6EAF0)}
+.ph img{width:100%;height:100%;object-fit:cover;object-position:top left}
+.ph .ph-msg{position:absolute;inset:0;display:none;align-items:center;justify-content:center;color:var(--ph-ink,#7A8698);font-size:14px;font-weight:600}
+.ph.empty img{display:none}.ph.empty .ph-msg{display:flex}
+.gif-btn{min-height:40px;padding:0 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:13.5px;font-weight:700;cursor:pointer}
+.gif-btn[aria-pressed="true"]{background:var(--mint);border-color:var(--mint);color:var(--on-mint)}
+/* 전체 작품 */
+.tools{display:flex;flex-direction:column;gap:14px;margin-bottom:22px}
+.search{display:flex;align-items:center;gap:10px;max-width:420px;border:1.5px solid var(--line);border-radius:12px;padding:0 14px;background:var(--card)}
+.search:focus-within{border-color:var(--mint)}
+.search input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--ink);font:inherit;min-height:48px}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.filters button{min-height:42px;padding:0 15px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:14.5px;font-weight:600;cursor:pointer}
+.filters button b{color:var(--mint-ink);margin-left:2px}
+.filters button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.filters button[aria-pressed="true"] b{color:var(--mint)}
+.count-line{margin:0 0 16px;font-size:14px;color:var(--sub)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}
+.item{display:flex;flex-direction:column;gap:8px;background:var(--card);border:1px solid var(--line);padding:20px}
+.item-thumb{display:block;margin:-20px -20px 8px}
+.item-thumb .ph{aspect-ratio:16/9}
+.item-meta{display:flex;justify-content:space-between;gap:8px;font-size:13px}
+.no{color:var(--sub);font-variant-numeric:tabular-nums;font-weight:700}
+.badge{font-weight:700;color:var(--navy);background:var(--navy-soft);padding:2px 9px;border-radius:999px;font-size:12px}
+.item h3{margin:0;font-size:17px}
+.star-mark{font-size:12px;color:var(--mint-ink);font-weight:700;margin-left:4px}
+.item p{margin:0;flex:1;font-size:14.5px;color:var(--sub)}
+.item-link{align-self:flex-start;display:inline-flex;align-items:center;min-height:44px;font-weight:700;font-size:14.5px;color:var(--mint-ink);text-decoration:none}
+.item-link:hover{text-decoration:underline}
+.empty-msg{grid-column:1/-1;padding:40px;text-align:center;color:var(--sub);border:1px dashed var(--line)}
+/* 진행 */
+.bar{height:14px;border-radius:999px;background:var(--navy-soft);overflow:hidden}
+.bar span{display:block;height:100%;width:0;border-radius:999px;background:var(--mint);transition:width 1.4s ease}
+.plist{margin:22px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px;font-size:14.5px}
+.plist li{display:flex;gap:10px;align-items:baseline}
+.plist span{flex:0 0 auto;font-size:12px;font-weight:700;padding:2px 8px;border-radius:6px}
+.plist .now{background:var(--mint-soft);color:var(--mint-ink)}
+.plist .plan{background:var(--navy-soft);color:var(--navy)}
+/* 일하는 방식 */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.steps li{display:flex;flex-direction:column;gap:12px}
+.step-no{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;background:var(--navy);color:#fff;font-size:15px}
+.steps h3{margin:0 0 4px;font-size:17px}
+.steps p{margin:0;font-size:14.5px;color:var(--sub)}
+.steps .step-ex{margin-top:8px;font-size:13.5px;color:var(--mint-ink)}
+/* 역량·경험·질문 */
+.skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.skill h3,.exp-group h3{margin:0 0 12px;font-size:17px}
+.skill ul,.exp-group ul{margin:0;padding-left:18px;font-size:15px}
+.skill li,.exp-group li{margin:4px 0}
+.skill li em{font-style:normal;font-size:13px;color:var(--sub);margin-left:4px}
+.exp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:40px}
+.faq{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:20px 40px 20px 0;font-weight:700;font-size:17px;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:24px;color:var(--mint-ink);font-weight:400}
+.faq[open] summary::after{content:"−"}
+.faq p{margin:0 0 22px;color:var(--sub);max-width:760px}
+/* 연락처 */
+.about{display:grid;grid-template-columns:220px minmax(0,1fr);gap:44px;align-items:start}
+.about .ph{aspect-ratio:3/4;border-radius:var(--r-media)}
+.about p{margin:0 0 14px;max-width:640px}
+.contact-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.btn-line{border-color:var(--navy);color:var(--navy);background:transparent}
+.btn-line:hover{background:var(--navy);color:#fff}
+footer{padding:28px 0;text-align:center;font-size:13.5px}
+.fill{background:#FFF1D6;color:#7A4B00;border-radius:3px;padding:0 3px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,calc(100% + 40px));visibility:hidden;background:var(--navy);color:#fff;padding:12px 20px;border-radius:999px;font-size:14px;transition:transform .3s,visibility .3s;z-index:90}
+.toast.show{transform:translate(-50%,0);visibility:visible}
+/* 고정 메뉴 */
+.nav{position:fixed;inset:0 0 auto;height:var(--nav-h);z-index:60}
+.nav .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{text-decoration:none;font-weight:800;white-space:nowrap;letter-spacing:-.01em}
+.nav-links{list-style:none;margin:0;padding:0;display:flex;gap:4px;min-width:0}
+.nav-links a{display:flex;align-items:center;min-height:44px;padding:0 13px;border-radius:10px;text-decoration:none;font-size:15px;font-weight:600;white-space:nowrap}
+/* 자세히 보기 창 */
+dialog.case{width:min(880px,calc(100vw - 32px));max-height:calc(100dvh - 48px);padding:0;border:0;border-radius:var(--r-dlg,20px);background:var(--card);color:var(--ink);box-shadow:0 40px 100px -30px rgba(5,20,45,.6);overflow:hidden}
+dialog.case::backdrop{background:rgba(6,20,42,.66)}
+dialog.case[open]{display:flex;flex-direction:column;animation:dlgIn .22s ease-out}
+@keyframes dlgIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.case-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px 16px 28px;border-bottom:1px solid var(--line)}
+.case-head small{display:block;font-size:13px;color:var(--mint-ink);font-weight:700}
+.case-head h3{margin:0;font-size:21px}
+.case-x{flex:0 0 44px;height:44px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--ink);font-size:24px;line-height:1;cursor:pointer}
+.case-body{overflow-y:auto;padding:24px 28px 4px}
+.case-media{margin:0 0 22px}
+.case-media .ph{border-radius:12px;border:1px solid var(--line);aspect-ratio:16/10;background:var(--ph-bg)}
+.case-media .ph img{object-fit:contain;background:#fff}
+.case-media figcaption{margin-top:6px;font-size:12.5px;color:var(--sub)}
+.case-body h4{margin:22px 0 6px;font-size:15.5px;color:var(--mint-ink)}
+.case-body p,.case-body ul,.case-body ol{margin:0;font-size:15px}
+.case-body ul,.case-body ol{padding-left:20px}
+.case-body li{margin:5px 0}
+.case-steps b{margin-right:6px}
+.case-last{margin-bottom:22px !important}
+.case-foot{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end;padding:14px 28px;border-top:1px solid var(--line)}
+body.locked{overflow:hidden}
+/* 한 줄 요약 · 기여 문장 · 효과 계산 */
+.one-line{margin:0 0 4px;font-weight:700;font-size:15.5px;color:var(--navy-txt,var(--navy))}
+.contrib{margin:16px 0 0;padding:14px 18px;border-left:4px solid var(--mint);background:var(--mint-soft);border-radius:0 10px 10px 0}
+.contrib p{margin:0;font-size:14.5px;line-height:1.7}
+.calc{margin:12px 0 0;font-size:14px}
+.calc summary{cursor:pointer;font-weight:700;color:var(--mint-ink);min-height:40px;display:flex;align-items:center}
+.calc table{width:100%;border-collapse:collapse;margin:4px 0 6px}
+.calc th,.calc td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:left;font-weight:500}
+.calc th{color:var(--sub);width:42%;font-size:13.5px}
+.calc tr:last-child td{font-weight:800;color:var(--navy-txt,var(--navy))}
+.calc p{margin:0;font-size:12.5px;color:var(--sub)}
+.role-count{display:block;margin-top:2px;font-size:13px;color:var(--sub)}
+/* 1분 자기소개 */
+.intro-card{display:grid;grid-template-columns:260px minmax(0,1fr);gap:40px;align-items:start}
+.intro-side p{margin:0 0 16px;color:var(--sub);font-size:15px}
+.intro-tabs{display:flex;gap:8px;margin-bottom:16px}
+.intro-tabs button{min-height:42px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-weight:700;font-size:14.5px;cursor:pointer}
+.intro-tabs button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.intro-text{counter-reset:para}
+.intro-text p{margin:0 0 12px;font-size:17px;line-height:1.8;max-width:720px}
+.intro-meta{display:flex;flex-direction:column;gap:10px;margin:0;padding:0;list-style:none;font-size:14px}
+.intro-meta li{padding-left:14px;border-left:3px solid var(--mint)}
+/* 메뉴 오른쪽 이력서 버튼 */
+.nav-right{display:flex;align-items:center;gap:10px;min-width:0}
+.nav-cta{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;font-weight:700;font-size:14px;text-decoration:none;white-space:nowrap;background:var(--mint);color:var(--on-mint)}
+@media (max-width:980px){.intro-card{grid-template-columns:minmax(0,1fr);gap:20px}}
+@media (max-width:700px){.nav-cta{display:none}.intro-text p{font-size:16px}}
+/* 반응형 */
+@media (max-width:980px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:32px}
+  .exp{grid-template-columns:1fr}
+}
+@media (max-width:700px){
+  :root{--nav-h:58px}
+  section{padding:76px 0}
+  .wrap{padding:0 18px}
+  .nav-links{overflow-x:auto;scrollbar-width:none}
+  .nav-links::-webkit-scrollbar{display:none}
+  .nav-links a{padding:0 9px;font-size:14px}
+  .grid,.skills,.steps{grid-template-columns:1fr}
+  .plist{grid-template-columns:1fr}
+  .about{grid-template-columns:1fr;gap:24px}
+  .about .ph{max-width:200px}
+  dialog.case{width:100vw;max-width:100vw;max-height:92dvh;margin:auto 0 0;border-radius:20px 20px 0 0}
+  .case-head{padding:12px 12px 12px 18px}.case-body{padding:18px 18px 4px}
+  .case-foot{padding:12px 18px calc(12px + env(safe-area-inset-bottom))}
+  .case-foot .btn{flex:1 1 100%}
+}
+@media (max-width:700px){.brand small{display:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none !important;transition:none !important}}
+
+/* 공통 추가: 언어 전환 · 이력서 버튼 · 기여 문장 · 계산 근거 · 면접 Q&A */
+.nav-right{display:flex;align-items:center;gap:10px;min-width:0}
+.lang{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;padding:2px;flex:0 0 auto}
+.lang button{min-height:34px;min-width:44px;padding:0 10px;border:0;border-radius:999px;background:transparent;color:var(--sub);font:inherit;font-size:13px;font-weight:800;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--navy);color:#fff}
+.nav-cta{display:inline-flex;align-items:center;min-height:38px;padding:0 15px;border-radius:999px;font-weight:700;font-size:14px;text-decoration:none;white-space:nowrap;background:var(--mint);color:var(--on-mint)}
+.one-line{margin:2px 0 0;font-weight:700;font-size:15.5px;color:var(--navy-txt,var(--navy))}
+.pse{margin:16px 0 0;display:flex;flex-direction:column;gap:10px}
+.pse div{display:grid;grid-template-columns:72px minmax(0,1fr);gap:10px}
+.pse dt{font-size:13px;font-weight:700;color:var(--sub);padding-top:2px}
+.pse dd{margin:0;font-size:15px}
+.pse dd.eff{font-weight:700;color:var(--navy-txt,var(--navy))}
+.contrib{margin:18px 0 0;padding:14px 18px;border-left:4px solid var(--mint);background:var(--mint-soft);border-radius:0 10px 10px 0}
+.contrib p{margin:0;font-size:14.5px;line-height:1.7}
+.calc{margin:10px 0 0;font-size:14px}
+.calc summary{cursor:pointer;font-weight:700;color:var(--mint-ink);min-height:42px;display:flex;align-items:center}
+.calc table{width:100%;border-collapse:collapse;margin:2px 0 6px}
+.calc th,.calc td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;font-weight:500;font-variant-numeric:tabular-nums}
+.calc th{color:var(--sub);width:46%;font-size:13.5px}
+.calc tr:last-child td{font-weight:800;color:var(--navy-txt,var(--navy))}
+.calc p{margin:0;font-size:12.5px;color:var(--sub)}
+.f-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.f-actions .btn{min-height:44px;font-size:14.5px;padding:0 18px}
+.intro-grid{display:grid;grid-template-columns:260px minmax(0,1fr);gap:40px;align-items:start}
+.intro-side p{margin:12px 0 16px;color:var(--sub);font-size:15px}
+.intro-side ol{margin:0;padding-left:20px;font-size:14px;color:var(--sub)}
+.intro-side li{margin:4px 0}
+#introText p{margin:0 0 12px;font-size:17px;line-height:1.85;max-width:720px}
+.ph video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.ph.vid{aspect-ratio:16/10}
+.case-media .ph video{object-fit:cover}
+.item-thumb{position:relative;display:block;margin:-20px -20px 8px}
+.item-thumb .ph{aspect-ratio:16/10}
+.item-thumb .ph video{opacity:0;transition:opacity .25s}
+.item-thumb.playing .ph video{opacity:1}
+.item-thumb .play{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 14px;border-radius:999px;border:0;background:rgba(8,22,44,.82);color:#fff;font:inherit;font-size:13px;font-weight:700;cursor:pointer;backdrop-filter:blur(4px)}
+.item-thumb .play span{font-size:11px}
+.item-thumb.playing .play{background:var(--mint);color:var(--on-mint)}
+.qa{border-bottom:1px solid var(--line)}
+.qa summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:44px 84px minmax(0,1fr) 24px;gap:10px;align-items:baseline;padding:18px 0}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:"+";color:var(--mint-ink);font-size:22px;line-height:1}
+.qa[open] summary::after{content:"−"}
+.qa-no{font-weight:800;color:var(--mint-ink);font-variant-numeric:tabular-nums}
+.qa-cat{font-size:12.5px;font-weight:700;color:var(--sub)}
+.qa-q{font-weight:700;font-size:16.5px}
+.qa-a{padding:0 28px 22px 98px}
+.qa-a p{margin:0;color:var(--ink);max-width:760px;line-height:1.8}
+.qa-tip{margin:18px 0 0;font-size:14px;color:var(--sub)}
+@media (max-width:980px){.intro-grid{grid-template-columns:minmax(0,1fr);gap:16px}}
+@media (max-width:700px){
+  .nav-cta{display:none}
+  .nav-links a{padding:0 7px;font-size:13.5px}
+  .lang button{min-width:38px;padding:0 6px}
+  .qa summary{grid-template-columns:36px minmax(0,1fr) 20px}
+  .qa-cat{display:none}
+  .qa-a{padding:0 0 20px 46px}
+  .pse div{grid-template-columns:minmax(0,1fr);gap:2px}
+  #introText p{font-size:16px}
+}
+@media (max-width:480px){.brand{font-size:15px}.nav .wrap{gap:8px}.nav-links{gap:0}.nav-links a{padding:0 6px;font-size:13px}.lang{padding:1px}.lang button[aria-pressed="true"]{display:none}.lang button{min-width:40px}}
+
+:root{--navy:#14406F;--navy-soft:rgba(120,160,215,.16);--mint:#3DD9C5;--mint-ink:#5BE3D1;--mint-soft:rgba(61,217,197,.12);--on-mint:#05302B;--navy-txt:#FFFFFF;
+--ink:#E7EEF8;--sub:#9EB1CB;--line:#22426E;--bg:#0A1E3A;--card:#0F2A4E;--ph-bg:#13325C;--ph-ink:#8FA6C4;--nav-h:62px;--r-media:12px;--btn-r:10px;--r-dlg:16px}
+.nav{background:rgba(10,30,58,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.brand{color:#fff;font-size:17px}
+.nav-links a{color:var(--sub)}.nav-links a:hover,.nav-links a.on{color:#fff;background:var(--navy-soft)}
+.lang{border-color:var(--line)}.lang button[aria-pressed="true"]{background:var(--mint);color:var(--on-mint)}
+.btn-mint,.btn-navy{background:var(--mint);color:var(--on-mint)}.btn-mint:hover,.btn-navy:hover{background:#62E4D3}
+.btn-line{border-color:#4A6C98;color:var(--ink)}.btn-line:hover{background:var(--navy-soft);color:#fff}
+h2{font-size:clamp(26px,3vw,34px);color:#fff}
+.band{background:#0C2343;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px}
+.badge{color:#CFE0F5;background:var(--navy-soft)}
+.filters button[aria-pressed="true"]{background:var(--mint);border-color:var(--mint);color:var(--on-mint)}
+.filters button[aria-pressed="true"] b{color:var(--on-mint)}
+.fill{background:rgba(255,196,92,.18);color:#FFD596}
+dialog.case{border:1px solid var(--line)} .case-media .ph img{background:#0F2A4E}
+.contrib{background:rgba(61,217,197,.09)}
+.toast{background:var(--mint);color:var(--on-mint)}
+
+.hero{padding:calc(var(--nav-h) + 40px) 0 72px}
+.desk{display:flex;flex-wrap:wrap;gap:10px 28px;padding:12px 18px;margin-bottom:36px;font-size:13.5px;color:var(--sub);border:1px solid var(--line);border-radius:12px;background:#0C2343}
+.desk b{color:#fff;font-weight:700;margin-left:6px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.95fr);gap:40px;align-items:start}
+.who{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-bottom:18px;color:var(--sub)}
+.who b{color:#fff;font-size:18px}
+.who .pill{padding:3px 11px;border-radius:999px;background:var(--mint-soft);color:var(--mint-ink);font-weight:700;font-size:13.5px}
+.hero h1{margin:0 0 18px;font-size:clamp(32px,4.4vw,52px);line-height:1.22;letter-spacing:-.035em;color:#fff}
+.hero .intro{margin:0 0 28px;color:var(--sub);font-size:16.5px;max-width:540px}
+.readouts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:28px}
+.readouts>div{padding:14px 16px}
+.readouts b{display:block;font-size:22px;color:#fff;font-variant-numeric:tabular-nums}
+.readouts>div>span{font-size:13px;color:var(--sub)}
+.actions{display:flex;flex-wrap:wrap;gap:10px}
+.demo{padding:24px}
+.demo h2{font-size:19px;margin-bottom:4px}
+.demo .demo-sub{margin:0 0 16px;font-size:13.5px;color:var(--sub)}
+.demo label{display:block;font-size:13px;font-weight:700;color:var(--sub);margin:14px 0 8px}
+.amt{display:flex;align-items:center;gap:8px;border:1.5px solid #3A5D8A;border-radius:10px;padding:0 12px;background:#0B2243}
+.amt span{color:var(--sub);font-weight:700}
+.amt input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:#fff;font:inherit;font-size:22px;font-weight:700;min-height:48px;font-variant-numeric:tabular-nums}
+.amt.bad{border-color:#F08A78}
+.err{margin:8px 0 0;font-size:13.5px;color:#FFB3A6}.err[hidden]{display:none}
+.terms{display:flex;flex-wrap:wrap;gap:8px}
+.terms button{min-height:42px;padding:0 13px;border-radius:10px;border:1.5px solid #3A5D8A;background:transparent;color:var(--ink);font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.terms button[aria-pressed="true"]{background:var(--mint);border-color:var(--mint);color:var(--on-mint)}
+.out{margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}
+.out-row{display:flex;justify-content:space-between;gap:12px;font-size:14.5px;color:var(--sub);margin:6px 0}
+.out-row b{color:#fff;font-size:20px;font-variant-numeric:tabular-nums}
+.out-row b.hot{color:#FF9E8C}
+.meter{height:10px;border-radius:999px;background:#0B2243;overflow:hidden;margin:4px 0 10px}
+.meter span{display:block;height:100%;border-radius:999px;transition:width .35s ease}
+.out-note{margin:10px 0 0;font-size:12.5px;color:var(--sub)}
+
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.tabs button{min-height:46px;padding:0 18px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--sub);font:inherit;font-weight:700;font-size:15px;cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--on-mint);background:var(--mint);border-color:var(--mint)}
+.stage{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);overflow:hidden}
+.stage-media{padding:16px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+.stage-media .ph{aspect-ratio:16/10;border-radius:10px}
+.stage-media .ph{background:#0B2243}
+.stage-media small{font-size:12.5px;color:var(--sub)}
+.stage-body{padding:24px}
+.stage-body .tag{font-size:13px;color:var(--mint-ink);font-weight:700}
+.stage-body h3{margin:2px 0 4px;font-size:24px;color:#fff}
+
+.item{border-radius:12px}.item-thumb .ph{border-radius:12px 12px 0 0}.item.star{border-color:var(--mint)}.item h3{color:#fff}
+.steps li{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.step-no{background:var(--mint);color:var(--on-mint)}
+.progress-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px}
+.progress-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:8px;margin-bottom:14px;color:var(--sub);font-size:14.5px}
+.progress-head strong{font-size:42px;color:#fff;line-height:1;font-variant-numeric:tabular-nums}
+.progress-head small{font-size:18px;color:var(--sub)} .progress-head b{color:var(--mint-ink)}
+.bar{background:#0B2243} .plist .plan{background:var(--navy-soft);color:#CFE0F5}
+.skill,.exp-group{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
+.skill h3,.exp-group h3{color:#fff}
+.qa{border-color:var(--line)} .qa[open]{background:rgba(61,217,197,.04)}
+.about .ph{border:1px solid var(--line)}
+footer{color:var(--sub);border-top:1px solid var(--line)}
+@media (max-width:980px){.hero-grid{grid-template-columns:minmax(0,1fr)}.stage{grid-template-columns:minmax(0,1fr)}.stage-media{border-right:0;border-bottom:1px solid var(--line)}}
+@media (max-width:700px){
+  .hero{padding-top:calc(var(--nav-h) + 20px)}
+  .readouts{grid-template-columns:1fr}
+  .readouts>div{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .actions .btn{flex:1 1 100%}
+  .demo{padding:18px}.tabs button{flex:1 1 auto}
+}
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="주요 메뉴"><div class="wrap"><a class="brand" href="#top" data-en="Gaeun Choi">최가은</a>
+<div class="nav-right"><ul class="nav-links">
+<li><a href="#featured" data-en="Projects">대표작</a></li><li><a href="#works" data-en="All work">전체 작품</a></li><li><a href="#skills" data-en="Skills">역량</a></li><li><a href="#contact" data-en="Contact">연락처</a></li></ul>
+<div class="lang" role="group" aria-label="언어 / Language"><button type="button" data-lang="ko" aria-pressed="true">KOR</button><button type="button" data-lang="en" aria-pressed="false">ENG</button></div>
+<a class="nav-cta" href="resume.pdf" target="_blank" rel="noopener" data-en="Résumé PDF">이력서 PDF</a></div></div></nav>
+<main>
+
+<header class="hero" id="top"><div class="wrap">
+  <div class="desk" aria-label="담당 영역">
+    <span data-en="Markets &lt;b&gt;North America · Latin America · Europe&lt;/b&gt;">관심 시장 <b>북미 · 중남미 · 유럽</b></span>
+    <span data-en="Industries &lt;b&gt;Power · Medical devices · Pharma&lt;/b&gt;">관심 산업 <b>전력 · 의료기기 · 제약</b></span>
+    <span data-en="Languages &lt;b&gt;Korean · English · Spanish (learning)&lt;/b&gt;">언어 <b>한국어 · 영어 · 스페인어(학습 중)</b></span>
+  </div>
+  <div class="hero-grid">
+    <div>
+      <div class="who"><b data-en="Gaeun Choi">최가은</b><span class="pill" data-en="Target role · Overseas sales">희망 직무 · 해외영업</span></div>
+      <h1 data-en="I've worked in overseas sales,&lt;br&gt;and I build tools with AI">현장을 겪어본 해외영업,<br>AI로 도구를 만듭니다</h1>
+      <p class="intro" data-en="Repetitive work I saw while emailing buyers and factories at an apparel vendor — I turned it into tools for tender review, buyer checks and price benchmarking. Try one on the right.">의류 벤더에서 바이어·공장과 영문으로 일하며 겪은 반복 업무를, 입찰서 검토·바이어 확인·단가 비교 도구로 직접 만들었습니다. 오른쪽에서 하나를 바로 써 보세요.</p>
+      <div class="readouts">
+        <div class="panel"><b data-en="16 months">1년 4개월</b><span data-en="Overseas sales experience">해외영업 실무 경력</span></div>
+        <div class="panel"><b><span data-trade>7</span><span data-en="">개</span></b><span data-en="Trade tools deployed">배포한 무역 업무 도구</span></div>
+        <div class="panel"><b data-en="4.5 months">4.5개월</b><span data-en="KITA Trade AX Master">KITA 무역 AX마스터</span></div>
+      </div>
+      <div class="actions"><a class="btn btn-mint" href="#featured" data-en="See projects">대표작 보기</a><a class="btn btn-line" href="resume.pdf" target="_blank" rel="noopener" data-en="Résumé PDF">이력서 PDF</a></div>
+    </div>
+    <div class="panel demo" id="demo">
+      <h2 data-en="Ship on these terms — how much could go unpaid?">이 조건으로 보내면, 얼마를 못 받을 수 있을까?</h2>
+      <p class="demo-sub" data-en="A slimmed-down version of Trade Checker's exposure calculator.">Trade Checker의 위험 노출액 계산을 줄여 옮긴 예시입니다.</p>
+      <label for="dAmt" data-en="Deal amount">거래 금액</label>
+      <div class="amt" id="dAmtBox"><span>USD</span><input id="dAmt" inputmode="numeric" value="100,000" autocomplete="off" aria-describedby="dErr"></div>
+      <p class="err" id="dErr" role="alert" hidden></p>
+      <label id="dTermsLabel" data-en="Payment terms the buyer asked for">바이어가 요청한 결제 조건</label>
+      <div class="terms" id="dTerms" role="group" aria-labelledby="dTermsLabel">
+        <button type="button" data-term="tt" aria-pressed="true" data-en="60-day T/T">T/T 후불 60일</button>
+        <button type="button" data-term="adv30" aria-pressed="false" data-en="30% advance + balance later">선수금 30% + 잔금 후불</button>
+        <button type="button" data-term="lc" aria-pressed="false" data-en="Sight L/C">일람출급 L/C</button>
+        <button type="button" data-term="adv100" aria-pressed="false" data-en="100% advance">100% 선결제</button>
+      </div>
+      <div class="out" aria-live="polite">
+        <div class="out-row"><span data-en="Could go unpaid after shipment">선적 후 못 받을 수 있는 금액</span><b id="dExp">USD 100,000</b></div>
+        <div class="meter"><span id="dMeter"></span></div>
+        <div class="out-row"><span data-en="Call">판단</span><span id="dVerdict" style="color:var(--ink);text-align:right"></span></div>
+      </div>
+      <p class="out-note" data-en="Illustrative only. L/C payments can still be delayed by document discrepancies. Real decisions follow the buyer check and company credit policy.">계산 예시입니다. L/C도 서류 하자가 생기면 대금이 늦어질 수 있습니다. 실제 판단은 바이어 확인 결과와 회사 여신 기준을 따릅니다.</p>
+    </div>
+  </div>
+</div></header>
+
+<section id="featured"><div class="wrap">
+  <div class="sec-head"><h2 data-en="Three featured tools">대표작 3</h2><p data-en="Switch tabs to see each tool. The screens are real recordings. 'est.' marks figures not yet measured.">탭을 눌러 대표작을 넘겨 보세요. 화면은 실제 사용 모습을 녹화한 것입니다. (예상)은 아직 측정하지 않은 값입니다.</p></div>
+  <div class="tabs" role="tablist" aria-label="대표작" id="featTabs"></div><div class="panel stage" id="featStage" role="tabpanel"></div>
+</div></section>
+
+<section id="intro" class="band"><div class="wrap">
+  <div class="intro-grid">
+    <div class="intro-side"><h2 data-en="One-minute introduction">1분 자기소개</h2>
+      <p data-en="What I say at career fairs and interviews — about one minute out loud. Use KOR / ENG above to switch.">상담·면접에서 말하는 그대로입니다. 소리 내어 약 1분. 위쪽 KOR / ENG로 언어를 바꿀 수 있습니다.</p>
+      <ol><li data-en="Greeting and target role">인사와 희망 직무</li><li data-en="Core message">핵심 메시지</li><li data-en="One project: problem → solution → impact">대표작: 문제 → 해결 → 효과</li><li data-en="My role and contribution">내 역할과 회사 기여</li></ol></div>
+    <div id="introText" aria-live="polite"></div>
+  </div>
+</div></section>
+
+<section id="how"><div class="wrap">
+  <div class="sec-head"><h2 data-en="How I work">일하는 방식</h2><p data-en="Every tool goes through the same four steps. AI writes the code; I own the rules and the checks.">도구를 만들 때마다 같은 네 단계를 거칩니다. 코드는 AI가 쓰고, 판단 기준과 검증은 제가 맡습니다.</p></div>
+  <ol class="steps" id="steps"></ol>
+</div></section>
+
+<section id="works" class="band"><div class="wrap">
+  <div class="sec-head"><h2 data-en="All work">전체 작품</h2><p data-en="Grouped by sales task. Pick a category or search by name.">해외영업 업무 분야별로 정리했습니다. 분야를 고르거나 이름·설명으로 찾아보세요.</p></div>
+  <div class="tools">
+    <label class="search" for="q"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input id="q" type="search" placeholder="예: 입찰, 단가, 인보이스" data-en-ph="e.g. tender, price, invoice" aria-label="작품 검색 / Search"></label>
+    <div class="filters" id="filters" role="group" aria-label="분야 / Category"></div>
+  </div>
+  <p class="count-line" id="countLine" aria-live="polite"></p>
+  <div class="grid" id="grid"></div>
+</div></section>
+
+<section id="interview"><div class="wrap">
+  <div class="sec-head"><h2 data-en="Questions I expect — and my answers">예상 질문과 제 답변</h2><p data-en="4 trade · 5 AI & tools · 1 personal. I tie even the trade questions back to my tools.">무역 실무 4 · AI 활용 5 · 인성 1. 무역 질문도 제 작품과 연결해 답했습니다.</p></div>
+  <div id="interviewList"></div>
+</div></section>
+
+<section id="progress" class="band"><div class="wrap">
+  <div class="sec-head"><h2 data-en="Road to 100 tools">업무 도구 100개 만들기</h2><p data-en="Turning sales tasks into tools, one at a time. Counts update from the project list.">해외영업 업무를 하나씩 도구로 만들고 있습니다. 숫자는 작품 목록에서 자동으로 셉니다.</p></div>
+  <div class="progress-card">
+    <div class="progress-head"><span data-en="Deployed so far (trade tools: &lt;b id=&quot;pTrade&quot;&gt;0&lt;/b&gt;)">지금까지 배포한 작품 (무역 업무 도구 <b id="pTrade">0</b>개)</span><strong><span id="pCount">0</span><small> / 100</small></strong></div>
+    <div class="bar" id="pBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="진행률 / Progress"><span></span></div>
+    <ul class="plist" id="pList"></ul>
+  </div>
+</div></section>
+
+<section id="skills"><div class="wrap">
+  <div class="sec-head"><h2 data-en="Skills and experience">역량과 경험</h2><p data-en="Only what I can back up.">근거를 댈 수 있는 것만 적었습니다.</p></div>
+  <div class="skills" id="skillList"></div>
+  <div class="exp" id="exp"></div>
+</div></section>
+
+<section id="contact" class="band"><div class="wrap">
+  <div class="about">
+    <div class="ph" data-ph><img src="images/profile.jpg" alt="최가은"><span class="ph-msg">사진 준비 중</span></div>
+    <div>
+      <h2 style="margin-bottom:18px" data-en="About and contact">소개와 연락처</h2>
+      <p data-en="I majored in English Language and Literature and worked in overseas sales at an apparel vendor for 16 months, emailing buyers and factories in English and managing orders and inventory. Now I build tools that cut repetitive sales work.">영어영문학을 전공하고, 의류 벤더에서 1년 4개월간 바이어·공장과 영문으로 일하며 오더와 재고를 관리했습니다. 지금은 해외영업의 반복 업무를 줄이는 도구를 직접 만들고 있습니다.</p>
+      <p data-en="I'm preparing for overseas sales in medical devices, pharmaceuticals and power equipment, with a focus on North America, Latin America and Europe.">의료기기·제약·전력 분야 해외영업을 준비하고 있으며, 북미·중남미·유럽 시장에 관심이 있습니다.</p>
+      <div class="contact-links" id="contactLinks"></div>
+    </div>
+  </div>
+</div></section>
+
+</main>
+<footer><span data-en="© <span id=&quot;year&quot;></span> Gaeun Choi · Trade AX Portfolio">© <span id="year"></span> 최가은 · 무역 AX 포트폴리오</span></footer>
+
+<dialog class="case" id="caseDlg" aria-labelledby="caseTitle">
+  <div class="case-head"><div><small id="caseTag"></small><h3 id="caseTitle"></h3></div><button type="button" class="case-x" id="caseX" aria-label="닫기 / Close">×</button></div>
+  <div class="case-body" id="caseBody"></div>
+  <div class="case-foot"><button type="button" class="btn btn-line" id="caseClose" data-en="Close">닫기</button><a class="btn btn-mint" id="caseTry" href="#" target="_blank" rel="noopener">직접 써 보기</a></div>
+</dialog>
+<div class="toast" id="toast" role="status"></div>
+<script>
+/* =====================================================================
+   내 정보 — 여기만 고치면 세 시안이 모두 바뀝니다 (영어는 ...En)
+   ===================================================================== */
+const PROFILE = {
+  name: "최가은", nameEn: "Gaeun Choi",
+  email: "",                                   // 예: "name@example.com"
+  phone: "",                                   // 예: "010-1234-5678"
+  github: "https://github.com/choeg6801-eng",
+  resume: "resume.pdf",
+};
+
+/* ---------------- 전체 작품 (desc 한국어 / descEn 영어) ---------------- */
+const CATEGORY_EN = {
+  "바이어, 영업": "Buyers & Sales", "견적, 가격": "Quotes & Pricing", "무역서류": "Trade Documents",
+  "환율, 결제": "FX & Payment", "통관, 규제": "Customs & Regulation", "시장조사, 기획": "Market Research",
+  "기타 연습": "Other Practice", "전체": "All",
+};
+// 화면 녹화: media/이름.mp4 (+ 포스터 media/이름.jpg). 없으면 사진 또는 '화면 준비 중'
+const VIDEO = {
+  1: ["media/bidlens.mp4", "media/bidlens.jpg"],
+  2: ["media/pharmaprice.mp4", "media/pharmaprice.jpg"],
+  4: ["media/atlas.mp4", "media/atlas.jpg"],
+  5: ["media/aurelis-med.mp4", "media/aurelis-med.jpg"],
+  6: ["media/aurelis-pharma.mp4", "media/aurelis-pharma.jpg"],
+  7: ["media/tradechecker.mp4", "media/tradechecker.jpg"],
+  8: ["media/penguin.mp4", "media/penguin.jpg"],
+  9: ["media/momentrip.mp4", "media/momentrip.jpg"],
+  10: ["media/setreview.mp4", "media/setreview.jpg"],
+  11: ["media/soundtrack.mp4", "media/soundtrack.jpg"],
+  12: ["media/timestamp.mp4", "media/timestamp.jpg"],
+};
+const vidOf = (no) => VIDEO[no] ? { src: VIDEO[no][0], poster: VIDEO[no][1] } : null;
+const PROJECTS = [
+  { no: 1,  title: "BidLens", url: "https://electricity-teal.vercel.app/", category: "바이어, 영업", star: true, img: "images/bidlens.jpg",
+    desc: "영문 입찰서(RFP)에서 핵심 규격 31개를 뽑아 자사 제품과 비교하고, 입찰 참여 여부와 바이어 질의서 초안을 만듭니다.",
+    descEn: "Extracts 31 key specs from English power-transformer RFPs, compares them with standard products, and drafts Bid/No-Bid decisions and clarification letters." },
+  { no: 2,  title: "PharmaPrice Lens", url: "https://pharmaprice-eight.vercel.app/", category: "견적, 가격", star: true, img: "images/pharmaprice.jpg",
+    desc: "의약품 수출입 단가를 UN Comtrade 데이터로 비교해 가격 협상의 근거를 만듭니다.",
+    descEn: "Benchmarks pharmaceutical import/export unit prices with UN Comtrade data to back up price negotiations." },
+  { no: 3,  title: "TEND (Tender Bot)", url: "https://tend-steel.vercel.app/", category: "바이어, 영업",
+    desc: "해외 의료기기 공공입찰을 찾아 자사 제품과 맞추는 서비스를 기획한 랜딩 페이지 시안입니다.",
+    descEn: "Landing-page concept for a service that matches overseas medical-device public tenders with company products." },
+  { no: 4,  title: "ATLAS HUB", url: "https://country-three-zeta.vercel.app/", category: "시장조사, 기획",
+    desc: "진출 국가의 비자·에티켓·경제·뉴스를 한 화면에서 보고 출장과 시장 조사를 준비합니다.",
+    descEn: "One screen for a target country's visa rules, business etiquette, economy and news — for trip and market prep." },
+  // 5·6·12번: 지금 주소는 Vercel 로그인 화면이 뜹니다. 공개 주소로 바꾼 뒤 쓰세요.
+  { no: 5,  title: "Aurelis Medical Trade Console", url: "https://medi2-dnpo-duoo6kg8s-choeg6801-eng.vercel.app/", category: "통관, 규제",
+    desc: "의료기기 수출 시 HS 코드·FTA 관세·도착 원가(Landed Cost)를 계산하고 영문 이메일 템플릿을 제공합니다.",
+    descEn: "Calculates HS codes, FTA duties and landed cost for medical-device exports, with English email templates." },
+  { no: 6,  title: "Aurelis Pharma Global Trade Console", url: "https://pharma-choeg-jpbo7dklp-choeg6801-eng.vercel.app/", category: "무역서류", img: "images/aurelis-invoice.jpg",
+    desc: "상업송장(인보이스, C/I)·포장명세서(P/L) 작성, CTD 체크리스트, GMP·인허가 일정 등 의약품 수출 업무를 한 화면에 모았습니다.",
+    descEn: "Pharma export console: commercial invoice and packing list builder, CTD checklist, GMP and licence schedules." },
+  { no: 7,  title: "Trade Checker", url: "https://tradecheck-mu.vercel.app/", category: "환율, 결제", star: true, img: "images/tradechecker.jpg",
+    desc: "처음 거래하는 바이어의 법인 실재·도메인·국가 위험을 확인해 결제 조건(T/T·L/C·선결제)을 정하는 근거를 만듭니다.",
+    descEn: "Checks a new buyer's legal entity, domain and country risk to support payment-term decisions (T/T, L/C, advance payment)." },
+  { no: 8,  title: "펭귄상사", titleEn: "Penguin Trading", url: "https://penguinss.vercel.app/", category: "기타 연습",
+    desc: "무역 흐름을 익히는 교육 과제용 텍스트 어드벤처 게임입니다.", descEn: "Text adventure game for learning the trade flow (course assignment)." },
+  { no: 9,  title: "Momentrip", url: "https://travel-ebon-seven.vercel.app/", category: "기타 연습",
+    desc: "대화로 조건을 받아 여행 일정을 추천하는 AI 서비스입니다.", descEn: "AI travel planner that builds itineraries from a chat." },
+  { no: 10, title: "셋리뷰", titleEn: "SetReview", url: "https://setreview.vercel.app/", category: "기타 연습",
+    desc: "공연 셋리스트 예습·복습 앱입니다.", descEn: "Concert setlist preview and review app." },
+  { no: 11, title: "Soundtrack Credit", url: "https://soundtrack-credit.vercel.app/", category: "기타 연습",
+    desc: "영화 관람 기록 서비스 소개 사이트입니다.", descEn: "Landing page for a movie-watching log service." },
+  { no: 12, title: "타임스탬프 2010", titleEn: "Timestamp 2010", url: "https://timestamp2010-14re5dm8a-choeg6801-eng.vercel.app/", category: "기타 연습",
+    desc: "레트로 타임슬립 박스 소개 사이트입니다.", descEn: "Landing page for a retro time-capsule box." },
+];
+
+/* ---------------- 대표작 3개 ---------------- */
+const FEATURED = [
+  { no: 1, img: "images/bidlens.jpg", gif: "images/bidlens.gif",
+    tag: "전력 · 입찰", tagEn: "Power equipment · Tenders",
+    oneLine: "영문 입찰서 규격 추출기 — 31개 항목 비교 · Bid/No-Bid 판정",
+    oneLineEn: "RFP spec extractor — 31-item comparison and Bid/No-Bid call",
+    problem: "해외 전력청의 영문 입찰서는 수십~수백 쪽이라, 규격을 찾아 자사 제품과 하나씩 대조하는 데 시간이 오래 걸립니다.",
+    problemEn: "Utility RFPs run to hundreds of pages, so finding each spec and checking it against our products takes a long time.",
+    solution: "핵심 규격 31개를 뽑아 자사 표준품과 비교하고, IEC·IEEE 기준 Bid/No-Bid 판정과 영문 질의서 초안을 만듭니다.",
+    solutionEn: "Pulls 31 key specs, compares them with standard products, and drafts an IEC/IEEE-based Bid/No-Bid call and clarification letter.",
+    effect: "공개 입찰서 52건으로 테스트 · 입찰서 1건 규격 정리 하루 → 반나절 (예상)",
+    effectEn: "Tested on 52 public tenders · spec review per tender from 1 day to half a day (est.)",
+    role: "판정 규칙 설계 · 결과 검증 · 점검·수정 요청 11회 / 코드 작성은 AI(Claude)",
+    roleEn: "Designed the decision rules, verified results, requested 11 review rounds / code written by AI (Claude)",
+    contrib: "해외영업 팀이 영문 입찰서 규격 정리 때문에 공고 1건에 하루 가까운 시간을 쓰는 문제를, 제가 만든 BidLens로 핵심 규격 31개를 먼저 뽑아 다른 항목만 확인하도록 줄였습니다. 그래서 회사는 같은 인원으로 더 많은 입찰을 검토할 수 있습니다.",
+    contribEn: "Sales teams spend nearly a day per tender sorting specs. With BidLens, they see 31 key specs first and check only the mismatches, so the same team can review more tenders.",
+    calc: [["① 지금 1건", "① Now, per tender", "약 8시간 (예상)", "~8 hours (est.)"], ["② 도구 사용 시", "② With the tool", "약 4시간 (예상)", "~4 hours (est.)"],
+           ["③ 한 달 건수", "③ Tenders per month", "4건 (가정)", "4 (assumed)"], ["④ 절약 = (①−②)×③", "④ Saved = (①−②)×③", "월 16시간 (예상)", "16 hours/month (est.)"]] },
+  { no: 7, img: "images/tradechecker.jpg", gif: "images/tradechecker.gif",
+    tag: "바이어 확인 · 결제 조건", tagEn: "Buyer check · Payment terms",
+    oneLine: "신규 바이어 확인기 — 결제 조건 제안 · 위험 노출액 계산",
+    oneLineEn: "New-buyer checker — payment-term advice and credit-exposure calculator",
+    problem: "처음 연락 온 바이어가 외상(T/T 후불)을 요청해도, 판단 근거는 홈페이지와 메일 내용뿐인 경우가 많습니다.",
+    problemEn: "When a new buyer asks for deferred T/T, the only evidence is often their website and emails.",
+    solution: "법인 등록부(GLEIF)·도메인 이력·OECD 국가 위험을 확인하고, 권장 결제 조건(L/C·선수금 비율)을 제시합니다.",
+    solutionEn: "Checks the legal-entity register (GLEIF), domain history and OECD country risk, then recommends payment terms (L/C, advance ratio).",
+    effect: "USD 100,000 · T/T 60일이면 노출액 USD 100,000, 일람출급 L/C면 0 (계산 예시) · 확인 반나절 → 10분 (예상)",
+    effectEn: "USD 100,000 on 60-day T/T = USD 100,000 exposure; sight L/C = 0 (illustrative) · check time half a day → 10 min (est.)",
+    role: "확인 순서 설계 · 결제 사기 점검 기능 기획 · 보안·입력 오류 점검 요청 / 구현은 AI(Claude)",
+    roleEn: "Designed the check order, planned payment-fraud checks, requested security and input checks / built by AI (Claude)",
+    contrib: "해외영업 팀이 처음 거래하는 바이어를 근거 없이 판단해 외상 조건을 잘못 정하는 문제를, 제가 만든 Trade Checker로 확인 결과와 권장 결제 조건을 한 장에 보여 주도록 바꿨습니다. 그래서 회사는 대금 미회수 위험을 줄이고 결재 근거를 남길 수 있습니다.",
+    contribEn: "Sales teams often grant credit to new buyers without evidence. Trade Checker puts the check results and recommended terms on one page, so the company lowers non-payment risk and keeps a record for approvals.",
+    calc: [["① 지금 1곳", "① Now, per buyer", "약 4시간 (예상)", "~4 hours (est.)"], ["② 도구 사용 시", "② With the tool", "약 10분 (예상)", "~10 min (est.)"],
+           ["③ 한 달 신규 바이어", "③ New buyers per month", "5곳 (가정)", "5 (assumed)"], ["④ 절약 = (①−②)×③", "④ Saved = (①−②)×③", "월 19시간 (예상)", "19 hours/month (est.)"]] },
+  { no: 2, img: "images/pharmaprice.jpg", gif: "images/pharmaprice.gif",
+    tag: "제약 · 단가 협상", tagEn: "Pharma · Price negotiation",
+    oneLine: "의약품 단가 비교 대시보드 — 시장 단가 대비 제시가 판정 · 영문 회신 초안",
+    oneLineEn: "Pharma price dashboard — offer vs. market price, plus an English reply draft",
+    problem: "바이어가 단가 인하를 요구할 때 시장 단가를 확인하려면 무역 통계를 직접 찾고 단위를 환산해야 합니다.",
+    problemEn: "To answer a price-cut request, sales staff must dig through trade statistics and convert units by hand.",
+    solution: "UN Comtrade 통계로 국가별 평균 단가를 비교해 제시가의 위치를 판정하고, 협상 기준가와 영문 회신 메일 초안을 만듭니다.",
+    solutionEn: "Compares country-level average prices from UN Comtrade, places the offer in the market range, and drafts target prices and an English reply.",
+    effect: "단가 근거 조사 2~3시간 → 10~20분 (예상) · 123개국 규제기관 정보",
+    effectEn: "Price research 2–3 hours → 10–20 min (est.) · regulator data for 123 countries",
+    role: "범위를 의약품으로 설정 · 데이터 오류(화장품·반도체 혼입) 발견·수정 요청 · 개선안 6개 중 3개 선택 / 구현은 AI(Claude)",
+    roleEn: "Scoped it to pharma, caught a data error (cosmetics and chips in results), chose 3 of 6 upgrades / built by AI (Claude)",
+    contrib: "해외영업 팀이 바이어의 단가 인하 요구에 근거를 찾느라 몇 시간을 쓰는 문제를, 제가 만든 PharmaPrice Lens로 국가별 평균 단가를 바로 비교하도록 줄였습니다. 그래서 회사는 숫자를 근거로 단가를 지킬 수 있습니다.",
+    contribEn: "Sales teams spend hours finding evidence against price-cut requests. PharmaPrice Lens compares country averages instantly, so the company can defend its price with numbers.",
+    calc: [["① 지금 1건", "① Now, per request", "약 2.5시간 (예상)", "~2.5 hours (est.)"], ["② 도구 사용 시", "② With the tool", "약 15분 (예상)", "~15 min (est.)"],
+           ["③ 한 달 건수", "③ Requests per month", "8건 (가정)", "8 (assumed)"], ["④ 절약 = (①−②)×③", "④ Saved = (①−②)×③", "월 18시간 (예상)", "18 hours/month (est.)"]] },
+];
+
+/* ---------------- 케이스 스터디 ([ ]는 직접 채울 부분) ---------------- */
+const CASES = {
+  1: { ko: { background: "해외 전력청의 변압기 입찰서(RFP)는 영어로 수십~수백 쪽입니다. [만든 계기 1문장 — 직접 작성]",
+             problem: "정격 용량·전압·시험 기준(IEC·IEEE) 같은 규격이 문서 곳곳에 흩어져 있어, 자사 표준품과 하나씩 대조하는 데 시간이 오래 걸립니다. 규격 하나를 놓치면 탈락하거나 서류를 다시 만들어야 합니다.",
+             process: [["기획", "전력 해외영업 업무 아이디어 47개 중 RFP 규격 추출을 고르고, 추출할 31개 항목과 Bid/No-Bid 판정 흐름을 정했습니다."], ["제작", "Claude로 화면과 기능을 구현했고, 디자인 시안 5개 중 하나를 골랐습니다."], ["검증", "점검·수정을 11차례 요청하고(AI 검수 활용), 세계은행·ADB·각국 전력청의 공개 입찰서 52건으로 테스트했습니다."], ["개선", "해외 공고 자동 갱신이 안정적으로 작동하지 않아, 공식 조달 사이트 링크로 바꿨습니다."]],
+             result: ["공개 입찰서 52건으로 테스트 — 추출 정확도 [직접 확인한 수치]", "점수 구성 검산: 기술 38.5 + 자격 21.9 + 상업 14.5 + 준비 기간 7 = 81.9 → 82점 (샘플 결과)", "입찰서 1건 규격 정리 하루 → 반나절 (예상, 가정: 31개 항목 밖의 특수 조건은 담당자가 따로 확인)"],
+             learned: "AI가 뽑은 규격은 원문과 대조하는 단계가 꼭 필요하다는 것을 배웠습니다. 다음에는 같은 입찰서로 수작업과 BidLens의 검토 시간을 직접 재 보겠습니다." },
+       en: { background: "Overseas utilities issue transformer RFPs that run to hundreds of pages in English. [Why I built it — one sentence]",
+             problem: "Ratings, voltages and test standards (IEC, IEEE) are scattered across the document, so matching them to our standard products takes hours. Missing one spec can mean disqualification or redoing the bid.",
+             process: [["Plan", "Picked RFP spec extraction from 47 power-sales ideas, and defined the 31 items and the Bid/No-Bid flow."], ["Build", "Built it with Claude and chose one of five design drafts."], ["Verify", "Requested 11 review rounds (AI-assisted) and tested it on 52 public tenders from the World Bank, ADB and national utilities."], ["Improve", "Replaced unreliable auto-updating tender feeds with links to official procurement sites."]],
+             result: ["Tested on 52 public tenders — extraction accuracy [my measured figure]", "Score check: technical 38.5 + qualification 21.9 + commercial 14.5 + lead time 7 = 81.9 → 82 (sample)", "Spec review per tender from 1 day to half a day (est.; special terms outside the 31 items are still checked by hand)"],
+             learned: "AI-extracted specs must be checked against the original text. Next, I'll time manual review and BidLens on the same tender." } },
+  7: { ko: { background: "처음 연락 온 해외 바이어가 첫 주문부터 외상(T/T 후불)을 요청하면, 담당자는 홈페이지와 메일만 보고 결제 조건을 정해야 합니다. [벤더 근무 중 관련 경험 1문장 — 직접 작성]",
+             problem: "법인 실재, 제재 명단, 대금 분쟁 이력을 각각 따로 찾아야 하고, 무엇을 확인했는지 결재 근거도 남지 않습니다.",
+             process: [["기획", "'조회 → 위험 신호 → 권장 결제 조건(L/C·선수금 비율)' 흐름과 송금 계좌 사기 점검 기능을 정했습니다."], ["제작", "Claude로 화면과 서버를 구현했습니다."], ["검증", "보안·조회 한도 점검과 PC·휴대폰 화면, 입력 오류(빈칸·음수 등) 처리 점검을 요청해 반영했습니다."], ["개선", "데이터 구입 비용과 신용정보법 위험을 확인한 뒤, A~F 등급 대신 '위험 신호'로 보여주는 방식을 마련했습니다."]],
+             result: ["무료 공개 데이터(GLEIF 법인 등록부, 도메인 등록 이력, OECD 국가 위험 분류) 연결. 신용·통관 데이터는 유료라 미연결", "샘플 C등급 바이어에 USD 100,000을 T/T 60일로 주면 위험 노출액 USD 100,000, 일람출급 L/C로 바꾸면 0 (계산 예시, L/C 서류 하자 위험은 별도)", "바이어 1곳 기본 확인 반나절 → 10분 이내 (예상, 측정 전)"],
+             learned: "결론만 주는 점수보다 출처가 보이는 근거가 결재에 쓸모 있다는 것을 배웠습니다. 다음에는 공개 기업 3곳을 실제로 조회해 확인 항목 수와 걸린 시간을 측정하겠습니다." },
+       en: { background: "When a new overseas buyer asks for deferred T/T on the first order, the salesperson often has only the website and emails to go on. [Related experience from my vendor job — one sentence]",
+             problem: "Legal existence, sanctions and payment disputes must each be checked separately, and nothing is left on record for approval.",
+             process: [["Plan", "Designed the 'look up → risk signals → recommended terms (L/C, advance ratio)' flow and a payment-fraud check."], ["Build", "Built the pages and server with Claude."], ["Verify", "Requested security, quota, mobile and input-error checks (blanks, negatives) and applied the fixes."], ["Improve", "After reviewing data costs and credit-information law risks, switched from A–F grades to plain 'risk signals'."]],
+             result: ["Connected free public data (GLEIF, domain records, OECD country risk). Paid credit and customs data not connected", "Sample C-grade buyer: USD 100,000 on 60-day T/T = USD 100,000 exposure; sight L/C = 0 (illustrative; L/C document discrepancies are a separate risk)", "Basic buyer check from half a day to under 10 minutes (est., not yet measured)"],
+             learned: "Evidence with visible sources is more useful for approvals than a bare score. Next, I'll look up three real companies and time each check." } },
+  2: { ko: { background: "바이어가 \"다른 나라에서는 더 싸게 산다\"며 단가 인하를 요구하는 상황을 가정했습니다. [만든 계기 1문장 — 직접 작성]",
+             problem: "그 말이 맞는지 확인하려면 무역 통계를 직접 찾고 수량 단위를 환산해야 합니다. 근거가 없으면 \"검토해 보겠다\"고만 답하게 됩니다.",
+             process: [["기획", "해외영업 도구 아이디어 중 제약 분야를 고르고, 범위를 의약품으로 좁혔습니다."], ["제작", "Claude로 UN Comtrade 단가 비교, 식약처 DMF 경쟁 제조소, 국가별 규제기관(PIC/S 등) 화면을 구현했습니다."], ["검증", "검색 결과에 화장품·반도체가 섞인 오류를 발견해 수정을 요청했고, 실제 UN Comtrade·정부 데이터와 대조하도록 요청했습니다."], ["개선", "현업 가치를 평가하게 한 뒤 개선안 6개 중 3개(관세청 HSK-10 연동, 선적 단위 데이터 업로드, 입찰 낙찰가 비교)를 골라 추가했습니다."]],
+             result: ["123개국 규제기관 정보, 영문 협상 메일 초안 제공", "검산: 제시가 USD 48.50 ÷ 시장 중앙값 USD 36.69 − 1 = +32.2% (예시 데이터)", "단가 근거 조사 2~3시간 → 10~20분 (예상, 가정: 품목의 HS 코드를 알고 있음)", "한계: 무역 통계 단가는 평균값이라 실제 계약 단가와 다를 수 있고, 관세청 실시간 연동은 실제 정부 API로 아직 검증하지 못함"],
+             learned: "통계 단가와 계약 단가의 차이를 화면에 밝혀야 협상 자료로 믿을 수 있다는 것을 배웠습니다. 다음에는 실제 품목 1개로 바이어 제시가를 판정하는 사례를 만들어 보겠습니다." },
+       en: { background: "The scenario: a buyer demands a price cut, saying \"we buy cheaper elsewhere.\" [Why I built it — one sentence]",
+             problem: "Checking that claim means searching trade statistics and converting units by hand. Without evidence, the only reply is \"we'll review it.\"",
+             process: [["Plan", "Chose pharma from my sales-tool ideas and narrowed the scope to medicines."], ["Build", "Built UN Comtrade price comparison, MFDS DMF competitor data and a regulator directory (PIC/S etc.) with Claude."], ["Verify", "Spotted cosmetics and semiconductors mixed into results and had it fixed; asked for checks against real UN Comtrade and government data."], ["Improve", "Had the tool's real-world value assessed, then picked 3 of 6 upgrades (Korea Customs HSK-10 link, shipment-level upload, tender award prices)."]],
+             result: ["Regulator data for 123 countries and English negotiation-email drafts", "Check: offer USD 48.50 ÷ market median USD 36.69 − 1 = +32.2% (sample data)", "Price research 2–3 hours → 10–20 minutes (est.; assumes the HS code is known)", "Limits: trade-stat prices are averages, not contract prices; the live Korea Customs link is not yet tested against the real API"],
+             learned: "Stating the gap between statistical and contract prices is what makes the data trustworthy. Next, I'll build a real one-product case." } },
+};
+
+/* ---------------- 예상 면접 질문 10 (무역 실무 4 · AX 5 · 인성 1) ---------------- */
+const INTERVIEW = [
+  { cat: "무역", catEn: "Trade", q: "FOB와 CIF의 차이를 설명하고, 우리 회사 상황에서 어떤 조건이 유리할까요?", qEn: "Explain FOB vs. CIF. Which suits our company better?",
+    a: "둘 다 위험은 선적항에서 본선에 적재될 때 바이어에게 넘어가고, 차이는 비용입니다. CIF는 셀러가 도착항까지 해상운임과 적하보험(송장금액의 110%, 최소 ICC(C))을 냅니다. 포워더 운임이 경쟁력 있다면 CIF로 운송을 직접 관리하는 게 유리하고, 운임 변동이 크면 FOB가 안전합니다. 컨테이너 화물이면 FCA·CIP가 권장된다는 점도 함께 검토하겠습니다.",
+    aEn: "Under both, risk passes when goods are loaded on board at the port of shipment; the difference is cost. Under CIF the seller pays ocean freight and insurance (110% of invoice, at least ICC(C)) to the destination port. If our forwarder rates are competitive, CIF lets us control shipping; if freight is volatile, FOB is safer. For containers, I'd also consider FCA or CIP." },
+  { cat: "무역", catEn: "Trade", q: "바이어가 단가 10% 인하를 요구하면 어떻게 대응하겠어요?", qEn: "A buyer asks for a 10% price cut. How do you respond?",
+    a: "바로 깎지 않고, 경쟁사 견적이 같은 사양·수량·인코텀즈·결제 조건인지 먼저 확인하겠습니다. 그다음 인증·납기·보증 같은 차이를 설명하고, 시장 평균 단가를 근거로 보여 주겠습니다. 조정이 필요하면 수량 할인이나 결제 조건부터 검토하고, 단가 변경은 마진을 확인한 뒤 팀장님 승인을 받겠습니다. 시장 단가 근거를 찾는 일을 줄이려고 PharmaPrice Lens를 만들었습니다.",
+    aEn: "I won't cut immediately. First I'd confirm the competing offer uses the same specs, quantity, Incoterms and payment terms. Then I'd explain our differences in certification, lead time and warranty, using market prices as evidence. If we must adjust, I'd start with volume discounts or payment terms, and change the price only after checking margin and getting approval. I built PharmaPrice Lens for exactly this evidence." },
+  { cat: "무역", catEn: "Trade", q: "선적이 일주일 지연됐다는 연락을 받았다면 무엇부터 하겠어요?", qEn: "You hear the shipment is delayed by a week. What do you do first?",
+    a: "지연 사유와 새 ETD·ETA를 포워더에게 확인한 뒤 바이어에게 바로 알리겠습니다. 다른 선박이나 일부 항공 운송 같은 대안을 함께 제시하고, L/C 거래라면 최종 선적일과 유효기일에 걸리는지 확인해 필요하면 조건 변경(Amendment)을 요청하겠습니다. 진행 내용은 기록으로 남겨 생산·물류팀과 공유하겠습니다.",
+    aEn: "I'd confirm the reason and the new ETD/ETA with the forwarder and tell the buyer right away, offering alternatives such as another vessel or partial air freight. If it's an L/C deal, I'd check the latest shipment and expiry dates and request an amendment if needed. I'd log everything and share it with production and logistics." },
+  { cat: "무역", catEn: "Trade", q: "환율이 크게 오르면 수출·수입에 각각 어떤 영향이 있나요?", qEn: "How does a sharp rise in the exchange rate affect exports and imports?",
+    a: "원·달러 환율이 오르면(원화 약세) 수출 기업은 같은 달러 매출을 더 많은 원화로 받아 이익이 늘고 가격 경쟁력도 생깁니다. 반대로 수입 원자재 원가는 올라갑니다. 원화 강세면 반대입니다. 그래서 견적 전에 '이 환율 밑으로 가면 손해'인 손익분기 환율을 계산해 두는 게 중요하고, 이를 위한 환율 마진 계산기를 다음 도구로 만들 계획입니다.",
+    aEn: "When the won weakens against the dollar, exporters receive more won for the same dollar sales and gain price competitiveness, while imported materials cost more. A stronger won does the opposite. So it's important to know the break-even rate before quoting — I plan to build an FX margin calculator for this next." },
+  { cat: "AX", catEn: "AI & Tools", q: "포트폴리오 작품 중 하나를 1분 안에 설명해 주세요.", qEn: "Explain one of your projects in under a minute.",
+    a: "Trade Checker입니다. 처음 거래하는 바이어가 외상을 요청할 때 판단 근거가 홈페이지와 메일뿐이라는 문제에서 출발했습니다. 법인 실재와 국가 위험을 확인하고 권장 결제 조건을 제안하는 도구를 만들었고, 10만 달러를 60일 외상으로 주면 노출액이 10만 달러 전부, 일람출급 L/C면 0이라는 식으로 금액으로 보여 줍니다. 확인 순서는 제가 정했고 구현은 AI로 했습니다.",
+    aEn: "Trade Checker. It started from the problem that new buyers ask for credit while we only have their website and emails. It checks legal existence and country risk and recommends payment terms, showing exposure in money — USD 100,000 on 60-day T/T is fully exposed; a sight L/C brings it to zero. I designed the checks; AI wrote the code." },
+  { cat: "AX", catEn: "AI & Tools", q: "AI가 다 만든 것 아닌가요? 본인이 한 일은 무엇인가요?", qEn: "Didn't AI build all this? What did you actually do?",
+    a: "코드 작성은 AI에 맡겼습니다. 저는 어떤 업무를 도구로 만들지 고르고, 판단할 항목과 순서를 정하고, 결과를 원문과 대조해 검증했습니다. 예를 들어 BidLens에서는 입찰 판단용 규격 31개를 정하고 공개 입찰서 52건으로 시험했고, 단가 대시보드에서는 의약품 검색에 화장품·반도체가 섞인 오류를 찾아 고치게 했습니다.",
+    aEn: "AI wrote the code. I chose which task to automate, defined what to check and in what order, and verified the output against source documents. For BidLens I set the 31 specs and tested on 52 public tenders; for the pricing dashboard I caught cosmetics and chips appearing in pharma searches and had it fixed." },
+  { cat: "AX", catEn: "AI & Tools", q: "\"월 16시간 절약\"은 어떻게 계산했나요?", qEn: "How did you calculate \"16 hours saved per month\"?",
+    a: "(지금 1건 걸리는 시간 − 도구로 걸리는 시간) × 한 달 건수로 계산했습니다. BidLens는 (8시간 − 4시간) × 월 4건입니다. 다만 8시간과 월 4건은 아직 직접 잰 값이 아니라 가정이어서 포트폴리오에 모두 '(예상)'으로 표시했습니다. 입사 후 실제 업무 건수로 다시 계산하겠습니다.",
+    aEn: "(Time per task now − time with the tool) × tasks per month. For BidLens: (8 h − 4 h) × 4 tenders. The 8 hours and 4 tenders are assumptions, not measurements, so every figure is marked 'est.' I'd recalculate with real volumes after joining." },
+  { cat: "AX", catEn: "AI & Tools", q: "입사하면 우리 팀의 어떤 업무를 먼저 자동화하고 싶나요?", qEn: "Which of our team's tasks would you automate first?",
+    a: "먼저 몇 달은 업무를 배우며 시간이 가장 많이 드는 반복 작업을 찾겠습니다. 지금 예상하기로는 입찰 공고 분석이나 견적·선적 서류 대조가 후보입니다. 회사 자료는 보안 규정을 확인한 뒤 회사가 승인한 도구에서만, 거래처명과 금액을 가린 예시로 먼저 만들겠습니다.",
+    aEn: "First I'd learn the work and find the most time-consuming repeated tasks — likely tender analysis or cross-checking quotes and shipping documents. I'd use only company-approved tools, following security rules, and start with anonymized sample data." },
+  { cat: "AX", catEn: "AI & Tools", q: "AI가 틀린 답을 낸 경험과, 어떻게 알아챘는지 말해 주세요.", qEn: "Tell us about a time AI got it wrong and how you noticed.",
+    a: "의약품 단가 대시보드를 만들 때, 의약품을 검색했는데 결과 목록에 화장품과 반도체 품목이 섞여 나왔습니다. 결과를 하나씩 훑어보다가 의약품이 아닌 품목을 발견했고, 범위를 의약품으로 좁혀 다시 확인하도록 고치게 했습니다. 그 뒤로는 숫자와 목록을 항상 원문이나 공식 통계와 대조합니다.",
+    aEn: "While building the pharma pricing dashboard, a medicine search returned cosmetics and semiconductors. I spotted the non-pharma items while reviewing the list and had the scope narrowed to medicines. Since then I always check figures and lists against source data." },
+  { cat: "인성", catEn: "Personal", q: "100개를 목표로 만들면서 가장 힘들었던 점은?", qEn: "What has been hardest about aiming for 100 tools?",
+    a: "[직접 경험으로 채우기 — 예: 하루 1개 루틴을 지키는 것, 완성도와 속도 사이에서 멈출 지점을 정하는 것]. 그래서 [내가 바꾼 방법]을 했고, 지금은 [결과]입니다.",
+    aEn: "[Fill in from your own experience — e.g., keeping a one-a-day routine, deciding when a tool is good enough]. So I [what I changed], and now [result]." },
+];
+
+/* ---------------- 일하는 방식 · 경험 · 역량 · 진행 ---------------- */
+const STEPS = [
+  { t: "현장의 불편 찾기", tEn: "Find the pain point", d: "해외영업에서 매번 시간이 드는 일을 고릅니다.", dEn: "Pick a sales task that eats time every time.", ex: "수백 쪽 영문 입찰서, 처음 보는 바이어의 외상 요청", exEn: "300-page RFPs, credit requests from new buyers" },
+  { t: "업무 규칙 정하기", tEn: "Define the rules", d: "무엇을 어떤 순서로 판단할지 직접 정합니다.", dEn: "Decide what to judge and in what order.", ex: "입찰 판단용 규격 31개, 바이어 확인 순서", exEn: "31 tender specs, a buyer-check sequence" },
+  { t: "AI로 만들기", tEn: "Build with AI", d: "정한 규칙대로 Claude에게 구현을 맡깁니다.", dEn: "Have Claude build to those rules.", ex: "화면 · 계산 · 데이터 연결", exEn: "Screens, calculations, data links" },
+  { t: "원문과 대조해 검증", tEn: "Verify against sources", d: "결과를 원문·공식 데이터와 맞춰 보고 고칩니다.", dEn: "Check results against originals and official data.", ex: "공개 입찰서 52건 테스트, 의약품 검색 오류 수정", exEn: "52 public tenders tested, pharma search error fixed" },
+];
+const EXPERIENCE = [
+  { g: "실무", gEn: "Work", items: [["의류 벤더 해외영업 1년 4개월 — 바이어·공장과 영문 이메일·메신저 소통, 오더 수량·재고 관리", "Overseas sales at an apparel vendor, 16 months — English email and chat with buyers and factories, order quantities and inventory"]] },
+  { g: "교육", gEn: "Training", items: [["KITA 무역아카데미 무역 AX마스터 2기 (4.5개월, 팀 프로젝트 3회)", "KITA Trade Academy, Trade AX Master course, cohort 2 (4.5 months, 3 team projects)"], ["국제통상학과 무역실무 수강 — 수입 프로젝트", "Trade Practice course (International Trade dept.) — import project"], ["대학생 무역 캠프 — 미니 무역 프로젝트", "University trade camp — mini trade project"]] },
+  { g: "외국인과 소통", gEn: "Working with people", items: [["서울시 움직이는 관광안내소 봉사 1년 (남대문·명동)", "Seoul mobile tourist information volunteer, 1 year (Namdaemun, Myeongdong)"], ["초·중학생 영어 강사 1년", "English instructor for elementary and middle school students, 1 year"]] },
+];
+const SKILLS = [
+  { t: "무역 지식", tEn: "Trade knowledge", items: [["인코텀즈 2020, 신용장(L/C), 입찰(RFP) 흐름을 도구 제작으로 학습", "Incoterms 2020, L/C and RFP workflows learned by building tools"], ["KITA 무역 AX마스터 2기", "KITA Trade AX Master, cohort 2"], ["무역영어 1급 <em>2026.11.15 응시 예정</em>", "Trade English Level 1 <em>exam on 15 Nov 2026</em>"]] },
+  { t: "AI · 자동화 도구", tEn: "AI & automation", items: [["Claude로 업무 도구 기획·제작 (규칙 설계·검증은 직접)", "Plan and build tools with Claude (I design rules and verify)"], ["GitHub 코드 관리, Vercel 배포", "GitHub for code, Vercel for deployment"], ["공공 데이터: UN Comtrade, 관세청, 식약처, GLEIF", "Public data: UN Comtrade, Korea Customs, MFDS, GLEIF"]] },
+  { t: "외국어", tEn: "Languages", items: [["영어 — 바이어·공장과 영문 업무 소통 <em>OPIc IH</em>", "English — daily work with buyers and factories <em>OPIc IH</em>"], ["스페인어 — 학습 중 <em>OPIc 2027년 1월 응시 예정</em>", "Spanish — learning <em>OPIc in Jan 2027</em>"]] },
+  { t: "자격증", tEn: "Certificates", items: [["컴퓨터활용능력 2급", "Computer Literacy Level 2"], ["무역영어 1급 <em>응시 예정</em>", "Trade English Level 1 <em>upcoming</em>"]] },
+];
+const IN_PROGRESS = [["now", "P/I → C/I → P/L 작성기", "P/I → C/I → P/L builder"], ["now", "매출·수금 트래커", "Sales and collections tracker"], ["now", "영문·스페인어 영업 메일 템플릿", "English/Spanish sales email templates"], ["plan", "L/C 조건 점검표 외 4개", "L/C checklist and 4 more"]];
+
+const INTRO = {
+  ko: ["안녕하세요, 해외영업 직무에 지원한 최가은입니다.",
+       "저는 현장을 겪어본 해외영업으로서, AI로 업무 도구를 만드는 사람입니다.",
+       "의류 벤더에서 1년 4개월 동안 해외 바이어, 공장과 영문 메일로 일하며 오더 수량과 재고를 관리했습니다. 그때 [가장 시간이 많이 들었던 확인 작업]이 매번 반복된다는 것을 알게 됐습니다.",
+       "그래서 해외영업 업무를 도구로 만들기 시작했습니다. 대표작 Trade Checker는 처음 거래하는 바이어가 외상을 요청할 때 쓰는 도구입니다. 법인이 실제로 있는지, 국가 위험은 어떤지 확인하고 알맞은 결제 조건을 제안합니다.",
+       "예를 들어 10만 달러를 60일 외상으로 주면 못 받을 수 있는 금액이 10만 달러 전부입니다. 신용장으로 바꾸면 그 위험을 크게 줄일 수 있습니다.",
+       "확인 순서는 제가 정했고, 구현은 AI로 했고, 결과는 제가 검증했습니다.",
+       "[지원 회사]에서도 바이어 조건을 먼저 꼼꼼히 확인하고, 반복되는 확인 작업은 팀이 함께 쓰는 도구로 만들겠습니다.",
+       "자세한 내용은 포트폴리오에서 직접 보실 수 있습니다. 감사합니다."],
+  en: ["Hello, I'm Gaeun Choi, and I'm applying for the overseas sales position.",
+       "I've worked in overseas sales, and I use AI to build tools for that work.",
+       "At an apparel vendor, I worked with overseas buyers and factories by email in English for 16 months, managing order quantities and inventory. I saw that [the check that took the most time] came up again and again.",
+       "So I started turning sales tasks into tools. My main project, Trade Checker, is for when a new buyer asks for deferred payment. It checks whether the company really exists and its country risk, and suggests suitable payment terms.",
+       "For example, on a 100,000-dollar deal with 60-day T/T, the full 100,000 dollars is at risk. A letter of credit greatly reduces that risk.",
+       "I decided what to check and in what order, used AI to build it, and verified the results myself.",
+       "At [Company], I'll check buyer terms carefully first, and turn repeated checks into tools the whole team can use.",
+       "You can see the details in my portfolio. Thank you."],
+};
+
+/* =====================================================================
+   공통 기능
+   ===================================================================== */
+let LANG = "ko";
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = (v) => String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const mark = (t) => esc(t).replace(/\[([^\]]+)\]/g, '<span class="fill">[$1]</span>');
+const en = () => LANG === "en";
+const tx = (o, k) => (en() && o[k + "En"] != null ? o[k + "En"] : o[k]);       // desc ↔ descEn
+const pick = (pair) => (en() ? pair[1] : pair[0]);                           // ["한국어","English"]
+const catName = (c) => (en() ? CATEGORY_EN[c] || c : c);
+const byNo = (n) => PROJECTS.find((p) => p.no === n) || {};
+const tradeCount = () => PROJECTS.filter((p) => p.category !== "기타 연습").length;
+const UI = {
+  gifOn: ["움직이는 화면 보기", "Play screen recording"], gifOff: ["정지 화면 보기", "Show still image"],
+  more: ["자세히 보기", "Case study"], tryIt: ["직접 써 보기", "Try it"], open: ["사이트 열기", "Open site"],
+  calc: ["효과 계산 근거 보기", "How the numbers were calculated"], calcNote: ["측정 전 예상값입니다. 직접 재 보면 이 숫자를 바꿉니다.", "Estimates, not measurements. I'll replace them once measured."],
+  problem: ["문제", "Problem"], solution: ["해결", "Solution"], effect: ["효과", "Impact"], role: ["내 역할", "My role"],
+  count: ["개 작품", " projects"], none: ["에 맞는 작품이 없습니다. 다른 단어로 찾거나 '전체'를 눌러 보세요.", " — no matches. Try another word or choose 'All'."],
+  star: ["대표작", "Featured"], copy: ["이메일 복사", "Copy email"], mail: ["메일 보내기", "Send email"], call: ["전화 걸기", "Call"],
+  noMail: ["이메일 준비 중", "Email coming soon"], noPhone: ["연락처 준비 중", "Phone coming soon"], gh: ["GitHub 보기", "GitHub"], cv: ["이력서 PDF", "Résumé (PDF)"],
+  copied: ["이메일 주소를 복사했습니다", "Email address copied"], media: ["실제 화면 녹화 · 예시 데이터 · 소리 없음", "Real screen recording · sample data · no sound"],
+  bg: ["배경", "Background"], pb: ["문제", "Problem"], pr: ["해결 과정", "How I built it"], rs: ["결과", "Results"], lr: ["배운 점과 다음 계획", "What I learned and next steps"],
+  play: ["화면 영상", "Watch"], playLabel: ["화면 영상 재생", "play screen recording"],
+  now: ["제작 중", "In progress"], plan: ["11월 예정", "Planned (Nov)"], photo: ["사진 준비 중", "Photo coming soon"],
+};
+const ui = (k) => pick(UI[k]);
+
+function watchImages(scope = document) {
+  $$("[data-ph]", scope).forEach((box) => {
+    const img = box.querySelector("img");
+    const fail = () => box.classList.add("empty");
+    if (!img) { if (!box.querySelector("video")) fail(); return; }
+    if (img.complete && img.naturalWidth === 0) fail();
+    img.addEventListener("error", fail);
+    img.addEventListener("load", () => box.classList.remove("empty"));
+  });
+  $$("[data-ph] video", scope).forEach((v) => v.addEventListener("error", () => v.closest("[data-ph]").classList.add("empty")));
+}
+const REDUCED = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+// 영상 액자: 16:10 화면을 꽉 채움. auto=자동 재생(소리 없음, 반복), 움직임 줄이기 설정이면 멈춘 채로 시작
+function phVideo(no, alt, auto = true, controls = false) {
+  const v = vidOf(no);
+  if (!v) return phImg("", alt);
+  const play = auto && !REDUCED;
+  return `<div class="ph vid" data-ph><video src="${esc(v.src)}" poster="${esc(v.poster)}" muted loop playsinline preload="metadata"${play ? " autoplay" : ""}${controls || !play ? " controls" : ""} aria-label="${esc(alt)}"></video><span class="ph-msg">${esc(ui("photo"))}</span></div>`;
+}
+// 작품 목록 썸네일: 포스터 사진 + ▶ 버튼(누르거나 마우스를 올리면 재생)
+function thumb(p) {
+  const v = vidOf(p.no);
+  if (!v && !p.img) return "";
+  return `<div class="item-thumb${v ? " has-vid" : ""}"${v ? ` data-vsrc="${esc(v.src)}"` : ""}>${phImg(v ? v.poster : p.img, "")}
+    ${v ? `<button type="button" class="play" aria-label="${esc(tx(p, "title"))} ${ui("playLabel")}"><span aria-hidden="true">▶</span> ${ui("play")}</button>` : ""}</div>`;
+}
+function startThumb(box) {
+  let vid = box.querySelector("video");
+  if (!vid) {
+    vid = document.createElement("video");
+    Object.assign(vid, { src: box.dataset.vsrc, muted: true, loop: true, playsInline: true });
+    vid.setAttribute("muted", ""); vid.setAttribute("playsinline", "");
+    box.querySelector(".ph").appendChild(vid);
+  }
+  box.classList.add("playing"); vid.play().catch(() => {});
+}
+function stopThumb(box) { const vid = box.querySelector("video"); if (vid) vid.pause(); box.classList.remove("playing"); }
+document.addEventListener("click", (e) => {
+  const b = e.target.closest(".item-thumb .play");
+  if (!b) return;
+  const box = b.closest(".item-thumb");
+  if (box.classList.contains("playing") && box.dataset.by === "hover") { box.dataset.by = "click"; return; }  // 마우스로 이미 재생 중이면 계속 재생
+  if (box.classList.contains("playing")) stopThumb(box); else { box.dataset.by = "click"; startThumb(box); }
+});
+if (window.matchMedia && matchMedia("(hover: hover)").matches && !REDUCED) {
+  document.addEventListener("mouseover", (e) => { const box = e.target.closest(".item-thumb.has-vid"); if (box && !box.classList.contains("playing")) { box.dataset.by = "hover"; startThumb(box); } });
+  document.addEventListener("mouseout", (e) => { const box = e.target.closest(".item-thumb.has-vid"); if (box && !box.contains(e.relatedTarget) && box.dataset.by === "hover") stopThumb(box); });
+}
+const phImg = (src, alt) => `<div class="ph" data-ph>${src ? `<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy">` : ""}<span class="ph-msg">${esc(ui("photo"))}</span></div>`;
+const gifBtn = (f) => `<button type="button" class="gif-btn" data-gif="${esc(f.gif)}" data-still="${esc(f.img)}" aria-pressed="false">${esc(ui("gifOn"))}</button>`;
+document.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-gif]");
+  if (!b) return;
+  const img = b.closest("[data-media]").querySelector("img");
+  const playing = b.getAttribute("aria-pressed") === "true";
+  img.src = playing ? b.dataset.still : b.dataset.gif;
+  b.setAttribute("aria-pressed", String(!playing));
+  b.textContent = ui(playing ? "gifOn" : "gifOff");
+});
+
+// 대표작 카드에 들어가는 공통 블록
+function featFields(f) {
+  return `<dl class="pse">
+    <div><dt>${ui("problem")}</dt><dd>${esc(tx(f, "problem"))}</dd></div>
+    <div><dt>${ui("solution")}</dt><dd>${esc(tx(f, "solution"))}</dd></div>
+    <div><dt>${ui("effect")}</dt><dd class="eff">${esc(tx(f, "effect"))}</dd></div>
+    <div><dt>${ui("role")}</dt><dd>${esc(tx(f, "role"))}</dd></div></dl>`;
+}
+function featExtra(f) {
+  return `<blockquote class="contrib"><p>${esc(tx(f, "contrib"))}</p></blockquote>
+    <details class="calc"><summary>${ui("calc")}</summary>
+      <table><tbody>${f.calc.map((r) => `<tr><th scope="row">${esc(en() ? r[1] : r[0])}</th><td>${esc(en() ? r[3] : r[2])}</td></tr>`).join("")}</tbody></table>
+      <p>${ui("calcNote")}</p></details>`;
+}
+const featActions = (f, cls = "btn-navy") => `<button type="button" class="btn ${cls}" data-case="${f.no}">${ui("more")}</button><a class="btn btn-line" href="${esc(byNo(f.no).url)}" target="_blank" rel="noopener">${ui("tryIt")}</a>`;
+
+/* ----- 전체 작품 ----- */
+const works = { cat: "전체", q: "" };
+function drawWorks() {
+  const cats = ["전체", ...new Set(PROJECTS.map((p) => p.category).sort((a, b) => (a === "기타 연습") - (b === "기타 연습") || a.localeCompare(b, "ko")))];
+  $("#filters").innerHTML = cats.map((c) => {
+    const n = c === "전체" ? PROJECTS.length : PROJECTS.filter((p) => p.category === c).length;
+    return `<button type="button" data-cat="${esc(c)}" aria-pressed="${c === works.cat}">${esc(catName(c))} <b>${n}</b></button>`;
+  }).join("");
+  const q = works.q.trim().toLowerCase();
+  const list = PROJECTS.filter((p) => (works.cat === "전체" || p.category === works.cat) &&
+    (!q || [p.title, p.titleEn, p.desc, p.descEn, p.category, CATEGORY_EN[p.category]].join(" ").toLowerCase().includes(q)));
+  $("#countLine").textContent = en() ? `${list.length}${ui("count")}` : `${list.length}${ui("count")}`;
+  $("#grid").innerHTML = list.length ? list.map((p) => `
+    <article class="item${p.star ? " star" : ""}">
+      ${thumb(p)}
+      <div class="item-meta"><span class="no">No.${String(p.no).padStart(2, "0")}</span><span class="badge">${esc(catName(p.category))}</span></div>
+      <h3>${esc(tx(p, "title"))}${p.star ? ` <span class="star-mark">${ui("star")}</span>` : ""}</h3>
+      <p>${esc(tx(p, "desc"))}</p>
+      <a class="item-link" href="${esc(p.url)}" target="_blank" rel="noopener">${ui("open")}</a>
+    </article>`).join("")
+    : `<div class="empty-msg">'${esc(works.q)}'${ui("none")}</div>`;
+  watchImages($("#grid"));
+}
+
+/* ----- 진행 현황 ----- */
+function drawProgress() {
+  const total = PROJECTS.length, pct = Math.min(total, 100);
+  $("#pCount").textContent = total;
+  $("#pTrade").textContent = tradeCount();
+  const bar = $("#pBar");
+  bar.setAttribute("aria-valuenow", String(pct));
+  if (!drawProgress.done) {
+    const fill = () => { bar.querySelector("span").style.width = pct + "%"; };
+    if ("IntersectionObserver" in window) new IntersectionObserver((e, o) => { if (e[0].isIntersecting) { fill(); o.disconnect(); } }, { threshold: 0.4 }).observe(bar);
+    else fill();
+    drawProgress.done = true;
+  }
+  $("#pList").innerHTML = IN_PROGRESS.map(([s, k, e]) => `<li><span class="${s}">${ui(s)}</span>${esc(en() ? e : k)}</li>`).join("");
+}
+
+/* ----- 면접 질문 10 ----- */
+function drawInterview() {
+  const box = $("#interviewList");
+  if (!box) return;
+  box.innerHTML = INTERVIEW.map((it, i) => `
+    <details class="qa"${i === 0 ? " open" : ""}>
+      <summary><span class="qa-no">Q${i + 1}</span><span class="qa-cat">${esc(tx(it, "cat"))}</span><span class="qa-q">${esc(tx(it, "q"))}</span></summary>
+      <div class="qa-a"><p>${mark(tx(it, "a"))}</p></div>
+    </details>`).join("");
+}
+
+/* ----- 나머지 공통 섹션 ----- */
+function drawCommon() {
+  $$("[data-trade]").forEach((el) => (el.textContent = tradeCount()));
+  $$("[data-total]").forEach((el) => (el.textContent = PROJECTS.length));
+  if ($("#steps")) $("#steps").innerHTML = STEPS.map((s, i) => `
+    <li><span class="step-no">${i + 1}</span><div><h3>${esc(tx(s, "t"))}</h3><p>${esc(tx(s, "d"))}</p><p class="step-ex">${esc(tx(s, "ex"))}</p></div></li>`).join("");
+  if ($("#exp")) $("#exp").innerHTML = EXPERIENCE.map((g) => `<div class="exp-group"><h3>${esc(tx(g, "g"))}</h3><ul>${g.items.map((i) => `<li>${esc(pick(i))}</li>`).join("")}</ul></div>`).join("");
+  if ($("#skillList")) $("#skillList").innerHTML = SKILLS.map((s) => `<div class="skill"><h3>${esc(tx(s, "t"))}</h3><ul>${s.items.map((i) => `<li>${pick(i)}</li>`).join("")}</ul></div>`).join("");
+  if ($("#introText")) $("#introText").innerHTML = INTRO[LANG].map((t) => `<p>${mark(t)}</p>`).join("");
+  $("#contactLinks").innerHTML = [
+    PROFILE.email ? `<button type="button" class="btn btn-line" data-copy="${esc(PROFILE.email)}">${ui("copy")}</button><a class="btn btn-line" href="mailto:${esc(PROFILE.email)}">${ui("mail")}</a>` : `<span class="btn btn-line is-off">${ui("noMail")}</span>`,
+    PROFILE.phone ? `<a class="btn btn-line" href="tel:${esc(PROFILE.phone.replace(/[^0-9+]/g, ""))}">${ui("call")}</a>` : `<span class="btn btn-line is-off">${ui("noPhone")}</span>`,
+    `<a class="btn btn-line" href="${esc(PROFILE.github)}" target="_blank" rel="noopener">${ui("gh")}</a>`,
+    `<a class="btn btn-line" href="${esc(PROFILE.resume)}" target="_blank" rel="noopener">${ui("cv")}</a>`,
+  ].join("");
+  $$(".ph-msg").forEach((m) => (m.textContent = ui("photo")));
+  $("#year").textContent = new Date().getFullYear();
+}
+function toast(msg) { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove("show"), 2000); }
+document.addEventListener("click", async (e) => {
+  const b = e.target.closest("[data-copy]");
+  if (!b) return;
+  try { await navigator.clipboard.writeText(b.dataset.copy); toast(ui("copied")); } catch { toast(b.dataset.copy); }
+});
+
+/* ----- 자세히 보기 창 ----- */
+let lastOpener = null;
+function openCase(no, opener) {
+  const dlg = $("#caseDlg"), p = byNo(no), f = FEATURED.find((x) => x.no === no), c = CASES[no] && CASES[no][LANG];
+  if (!c) return;
+  $("#caseTag").textContent = tx(f, "tag");
+  $("#caseTitle").textContent = p.title;
+  $("#caseTry").href = p.url;
+  $("#caseTry").textContent = ui("tryIt");
+  $("#caseBody").innerHTML = `
+    <figure class="case-media">${phVideo(f.no, p.title, true, true)}<figcaption>${ui("media")}</figcaption></figure>
+    <h4>${ui("bg")}</h4><p>${mark(c.background)}</p>
+    <h4>${ui("pb")}</h4><p>${mark(c.problem)}</p>
+    <h4>${ui("pr")}</h4><ol class="case-steps">${c.process.map(([k, v]) => `<li><b>${esc(k)}</b> ${mark(v)}</li>`).join("")}</ol>
+    <h4>${ui("rs")}</h4><ul>${c.result.map((r) => `<li>${mark(r)}</li>`).join("")}</ul>
+    <h4>${ui("lr")}</h4><p class="case-last">${mark(c.learned)}</p>`;
+  watchImages($("#caseBody"));
+  $("#caseBody").scrollTop = 0;
+  lastOpener = opener || null;
+  if (typeof dlg.showModal === "function") dlg.showModal(); else dlg.setAttribute("open", "");
+  document.body.classList.add("locked");
+  $("#caseX").focus();
+}
+function setupDialog() {
+  const dlg = $("#caseDlg");
+  const close = () => { if (dlg.open) { if (dlg.close) dlg.close(); else dlg.removeAttribute("open"); } };
+  dlg.addEventListener("close", () => { document.body.classList.remove("locked"); if (lastOpener) lastOpener.focus(); });
+  document.addEventListener("click", (e) => { const b = e.target.closest("[data-case]"); if (b) openCase(Number(b.dataset.case), b); });
+  $("#caseX").addEventListener("click", close);
+  $("#caseClose").addEventListener("click", close);
+  dlg.addEventListener("click", (e) => {
+    if (e.target !== dlg) return;
+    const r = dlg.getBoundingClientRect();
+    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) close();
+  });
+}
+
+/* ----- 메뉴 ----- */
+function setupNav() {
+  const links = $$(".nav-links a");
+  if (!("IntersectionObserver" in window)) return;
+  const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+    if (en.isIntersecting) links.forEach((a) => a.classList.toggle("on", a.getAttribute("href") === "#" + en.target.id));
+  }), { rootMargin: "-45% 0px -50% 0px" });
+  links.forEach((a) => { const s = document.getElementById(a.getAttribute("href").slice(1)); if (s) io.observe(s); });
+}
+
+/* ----- KOR / ENG 전환 (실습 16) — 선택한 언어는 기억하지 않음 ----- */
+const TITLES = { ko: document.title, en: document.querySelector("meta[name=title-en]")?.content || document.title };
+let drawVariant = () => {};
+function applyLang(lang) {
+  LANG = lang;
+  document.documentElement.lang = lang;
+  document.title = TITLES[lang];
+  $$("[data-en]").forEach((el) => {
+    if (el.dataset.ko == null) el.dataset.ko = el.innerHTML;
+    el.innerHTML = lang === "en" ? el.dataset.en : el.dataset.ko;
+  });
+  $$("[data-en-ph]").forEach((el) => {
+    if (el.dataset.koPh == null) el.dataset.koPh = el.getAttribute("placeholder");
+    el.setAttribute("placeholder", lang === "en" ? el.dataset.enPh : el.dataset.koPh);
+  });
+  $$("[data-lang]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+  drawCommon(); drawWorks(); drawProgress(); drawInterview(); drawVariant();
+  watchImages();
+}
+document.addEventListener("click", (e) => { const b = e.target.closest("[data-lang]"); if (b && b.dataset.lang !== LANG) applyLang(b.dataset.lang); });
+
+function boot(variantDraw) {
+  drawVariant = variantDraw;
+  $("#filters").addEventListener("click", (e) => { const b = e.target.closest("[data-cat]"); if (b) { works.cat = b.dataset.cat; drawWorks(); } });
+  $("#q").addEventListener("input", (e) => { works.q = e.target.value; drawWorks(); });
+  setupDialog();
+  setupNav();
+  applyLang("ko");
+}
+
+
+let curFeat = FEATURED[0].no;
+function drawFeatured() {
+  const f = FEATURED.find((x) => x.no === curFeat), p = byNo(f.no);
+  $("#featTabs").innerHTML = FEATURED.map((x) => `<button type="button" role="tab" data-no="${x.no}" aria-selected="${x.no === curFeat}">${esc(byNo(x.no).title)}</button>`).join("");
+  $("#featStage").innerHTML = `
+    <div class="stage-media">${phVideo(f.no, p.title)}<small>${ui("media")}</small></div>
+    <div class="stage-body"><span class="tag">${esc(tx(f, "tag"))}</span><h3>${esc(p.title)}</h3><p class="one-line">${esc(tx(f, "oneLine"))}</p>
+      ${featFields(f)}${featExtra(f)}<div class="f-actions">${featActions(f, "btn-mint")}</div></div>`;
+  watchImages($("#featStage"));
+}
+document.addEventListener("click", (e) => { const b = e.target.closest("#featTabs [data-no]"); if (b) { curFeat = Number(b.dataset.no); drawFeatured(); } });
+document.addEventListener("keydown", (e) => {
+  if (!e.target.closest("#featTabs") || !["ArrowRight", "ArrowLeft"].includes(e.key)) return;
+  const i = FEATURED.findIndex((f) => f.no === curFeat), n = FEATURED.length;
+  curFeat = FEATURED[(i + (e.key === "ArrowRight" ? 1 : n - 1)) % n].no; drawFeatured();
+  $(`#featTabs [data-no="${curFeat}"]`).focus();
+});
+/* 첫 화면 계산 예시 */
+const DEMO = { tt: [1, "첫 거래라면 위험합니다. 선수금이나 L/C로 조정을 제안하세요.", "Risky for a first deal — propose an advance or an L/C."],
+               adv30: [.7, "선수금으로 30%를 먼저 받아 위험이 줄어듭니다.", "Collecting 30% up front lowers the risk."],
+               lc: [0, "은행이 지급을 약속해 대금 위험이 크게 줄어듭니다.", "The bank undertakes payment, so risk drops sharply."],
+               adv100: [0, "선적 전에 전액을 받아 대금 위험이 없습니다.", "Paid in full before shipment — no payment risk."] };
+let dTerm = "tt", dAmount = 100000;
+function demoCheck(raw) {
+  const s = String(raw).trim();
+  if (!s) return en() ? "Enter a deal amount, e.g. 100,000" : "거래 금액을 입력하세요. 예: 100,000";
+  if (/^-/.test(s)) return en() ? "The amount can't be negative." : "거래 금액에 마이너스(-)는 쓸 수 없습니다.";
+  const n = Number(s.replace(/[,\s]/g, ""));
+  if (!Number.isFinite(n)) return en() ? "Use numbers only (commas are fine)." : "숫자만 입력하세요. 쉼표(,)는 넣어도 됩니다.";
+  if (n <= 0) return en() ? "The amount must be greater than 0." : "거래 금액은 0보다 커야 합니다.";
+  if (n > 10000000) return en() ? "Enter USD 10,000,000 or less." : "USD 10,000,000 이하로 입력하세요.";
+  dAmount = Math.round(n); return "";
+}
+function drawDemo() {
+  const [share, ko, enT] = DEMO[dTerm], exp = dAmount * share;
+  $("#dExp").textContent = "USD " + Math.round(exp).toLocaleString("en-US");
+  $("#dExp").classList.toggle("hot", share >= .7);
+  const m = $("#dMeter"); m.style.width = share * 100 + "%"; m.style.background = share >= .7 ? "#FF8C78" : "var(--mint)";
+  $("#dVerdict").textContent = en() ? enT : ko;
+}
+$("#dAmt").addEventListener("input", () => {
+  const msg = demoCheck($("#dAmt").value);
+  $("#dErr").textContent = msg; $("#dErr").hidden = !msg; $("#dAmtBox").classList.toggle("bad", !!msg);
+  $("#dAmt").setAttribute("aria-invalid", String(!!msg));
+  if (!msg) drawDemo();
+});
+$("#dAmt").addEventListener("blur", () => { if (!demoCheck($("#dAmt").value)) $("#dAmt").value = dAmount.toLocaleString("en-US"); });
+$("#dTerms").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-term]"); if (!b) return;
+  dTerm = b.dataset.term; $$("#dTerms button").forEach((x) => x.setAttribute("aria-pressed", String(x === b))); drawDemo();
+});
+boot(() => { drawFeatured(); drawDemo(); const err = $("#dErr"); if (!err.hidden) err.textContent = demoCheck($("#dAmt").value); });
+
+</script>
+</body>
+</html>
