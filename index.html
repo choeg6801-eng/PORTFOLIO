@@ -216,6 +216,13 @@ body.locked{overflow:hidden}
 .item-thumb .play{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 14px;border-radius:999px;border:0;background:rgba(8,22,44,.82);color:#fff;font:inherit;font-size:13px;font-weight:700;cursor:pointer;backdrop-filter:blur(4px)}
 .item-thumb .play span{font-size:11px}
 .item-thumb.playing .play{background:var(--mint);color:var(--on-mint)}
+.cv-off{opacity:.6}
+.cv-off::after{content:" · 준비 중";font-weight:600}
+html[lang="en"] .cv-off::after{content:" · soon"}
+.toast{max-width:min(520px,calc(100vw - 32px));text-align:center;border-radius:16px;line-height:1.5}
+.other-work{margin:28px 0 0;padding-top:18px;border-top:1px solid var(--line);font-size:14px;color:var(--sub);line-height:1.9}
+.other-work a{color:var(--sub);text-decoration:underline;text-underline-offset:3px;display:inline-block;min-height:32px;line-height:32px}
+.other-work a:hover{color:var(--ink)}
 .qa{border-bottom:1px solid var(--line)}
 .qa summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:44px 84px minmax(0,1fr) 24px;gap:10px;align-items:baseline;padding:18px 0}
 .qa summary::-webkit-details-marker{display:none}
@@ -397,13 +404,14 @@ footer{color:var(--sub);border-top:1px solid var(--line)}
 </div></section>
 
 <section id="works" class="band"><div class="wrap">
-  <div class="sec-head"><h2 data-en="All work">전체 작품</h2><p data-en="Grouped by sales task. Pick a category or search by name.">해외영업 업무 분야별로 정리했습니다. 분야를 고르거나 이름·설명으로 찾아보세요.</p></div>
+  <div class="sec-head"><h2 data-en="All work">전체 작품</h2><p data-en="Trade tools grouped by sales task. Pick a category or search by name.">해외영업 업무 분야별로 정리한 무역 업무 도구입니다. 분야를 고르거나 이름·설명으로 찾아보세요.</p></div>
   <div class="tools">
     <label class="search" for="q"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input id="q" type="search" placeholder="예: 입찰, 단가, 인보이스" data-en-ph="e.g. tender, price, invoice" aria-label="작품 검색 / Search"></label>
     <div class="filters" id="filters" role="group" aria-label="분야 / Category"></div>
   </div>
   <p class="count-line" id="countLine" aria-live="polite"></p>
   <div class="grid" id="grid"></div>
+  <p class="other-work" id="otherWork" hidden></p>
 </div></section>
 
 <section id="interview"><div class="wrap">
@@ -412,10 +420,10 @@ footer{color:var(--sub);border-top:1px solid var(--line)}
 </div></section>
 
 <section id="progress" class="band"><div class="wrap">
-  <div class="sec-head"><h2 data-en="Road to 100 tools">업무 도구 100개 만들기</h2><p data-en="Turning sales tasks into tools, one at a time. Counts update from the project list.">해외영업 업무를 하나씩 도구로 만들고 있습니다. 숫자는 작품 목록에서 자동으로 셉니다.</p></div>
+  <div class="sec-head"><h2 data-en="Road to 50 trade tools">무역 업무 도구 50개 만들기</h2><p data-en="Turning sales tasks into tools, one at a time. Counts update from the project list.">해외영업 업무를 하나씩 도구로 만들고 있습니다. 숫자는 작품 목록에서 자동으로 셉니다.</p></div>
   <div class="progress-card">
-    <div class="progress-head"><span data-en="Deployed so far (trade tools: &lt;b id=&quot;pTrade&quot;&gt;0&lt;/b&gt;)">지금까지 배포한 작품 (무역 업무 도구 <b id="pTrade">0</b>개)</span><strong><span id="pCount">0</span><small> / 100</small></strong></div>
-    <div class="bar" id="pBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="진행률 / Progress"><span></span></div>
+    <div class="progress-head"><span data-en="Trade tools deployed so far">지금까지 배포한 무역 업무 도구</span><strong><span id="pCount">0</span><small> / <span data-goal>50</span></small></strong></div>
+    <div class="bar" id="pBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="목표 50개 중 진행률(%) / Progress toward 50 (%)"><span></span></div>
     <ul class="plist" id="pList"></ul>
   </div>
 </div></section>
@@ -460,6 +468,11 @@ const PROFILE = {
 };
 
 /* ---------------- 전체 작품 (desc 한국어 / descEn 영어) ---------------- */
+// '기타 연습' 작품은 카드로 보여 주지 않고 전체 작품 맨 아래에 한 줄로만 표시합니다.
+// 그 한 줄도 빼고 싶으면 SHOW_OTHER 를 false 로 바꾸세요.
+const SHOW_OTHER = true;
+// 무역 업무 도구 목표 개수 (진행 막대 기준)
+const GOAL = 50;
 const CATEGORY_EN = {
   "바이어, 영업": "Buyers & Sales", "견적, 가격": "Quotes & Pricing", "무역서류": "Trade Documents",
   "환율, 결제": "FX & Payment", "통관, 규제": "Customs & Regulation", "시장조사, 기획": "Market Research",
@@ -473,11 +486,6 @@ const VIDEO = {
   5: ["media/aurelis-med.mp4", "media/aurelis-med.jpg"],
   6: ["media/aurelis-pharma.mp4", "media/aurelis-pharma.jpg"],
   7: ["media/tradechecker.mp4", "media/tradechecker.jpg"],
-  8: ["media/penguin.mp4", "media/penguin.jpg"],
-  9: ["media/momentrip.mp4", "media/momentrip.jpg"],
-  10: ["media/setreview.mp4", "media/setreview.jpg"],
-  11: ["media/soundtrack.mp4", "media/soundtrack.jpg"],
-  12: ["media/timestamp.mp4", "media/timestamp.jpg"],
 };
 const vidOf = (no) => VIDEO[no] ? { src: VIDEO[no][0], poster: VIDEO[no][1] } : null;
 const PROJECTS = [
@@ -630,7 +638,7 @@ const INTERVIEW = [
   { cat: "AX", catEn: "AI & Tools", q: "AI가 틀린 답을 낸 경험과, 어떻게 알아챘는지 말해 주세요.", qEn: "Tell us about a time AI got it wrong and how you noticed.",
     a: "의약품 단가 대시보드를 만들 때, 의약품을 검색했는데 결과 목록에 화장품과 반도체 품목이 섞여 나왔습니다. 결과를 하나씩 훑어보다가 의약품이 아닌 품목을 발견했고, 범위를 의약품으로 좁혀 다시 확인하도록 고치게 했습니다. 그 뒤로는 숫자와 목록을 항상 원문이나 공식 통계와 대조합니다.",
     aEn: "While building the pharma pricing dashboard, a medicine search returned cosmetics and semiconductors. I spotted the non-pharma items while reviewing the list and had the scope narrowed to medicines. Since then I always check figures and lists against source data." },
-  { cat: "인성", catEn: "Personal", q: "100개를 목표로 만들면서 가장 힘들었던 점은?", qEn: "What has been hardest about aiming for 100 tools?",
+  { cat: "인성", catEn: "Personal", q: "무역 업무 도구 50개를 목표로 만들면서 가장 힘들었던 점은?", qEn: "What has been hardest about aiming for 50 trade tools?",
     a: "[직접 경험으로 채우기 — 예: 하루 1개 루틴을 지키는 것, 완성도와 속도 사이에서 멈출 지점을 정하는 것]. 그래서 [내가 바꾼 방법]을 했고, 지금은 [결과]입니다.",
     aEn: "[Fill in from your own experience — e.g., keeping a one-a-day routine, deciding when a tool is good enough]. So I [what I changed], and now [result]." },
 ];
@@ -699,6 +707,9 @@ const UI = {
   copied: ["이메일 주소를 복사했습니다", "Email address copied"], media: ["실제 화면 녹화 · 예시 데이터 · 소리 없음", "Real screen recording · sample data · no sound"],
   bg: ["배경", "Background"], pb: ["문제", "Problem"], pr: ["해결 과정", "How I built it"], rs: ["결과", "Results"], lr: ["배운 점과 다음 계획", "What I learned and next steps"],
   play: ["화면 영상", "Watch"], playLabel: ["화면 영상 재생", "play screen recording"],
+  cvMissing: ["이력서 PDF를 준비 중입니다. 이메일로 요청해 주시면 바로 보내 드리겠습니다.", "My résumé PDF is on its way — email me and I'll send it right away."],
+  cvLocal: ["미리보기 파일에서는 이력서를 열 수 없습니다. 배포 폴더의 index.html 옆에 resume.pdf를 넣으면 열립니다.", "The résumé can't open from this preview file. Put resume.pdf next to index.html in the deploy folder."],
+  other: ["그 밖에 직접 만든 개인·교육 과제 프로젝트 {n}개:", "Other personal and course projects I built ({n}):"],
   now: ["제작 중", "In progress"], plan: ["11월 예정", "Planned (Nov)"], photo: ["사진 준비 중", "Photo coming soon"],
 };
 const ui = (k) => pick(UI[k]);
@@ -781,14 +792,16 @@ const featActions = (f, cls = "btn-navy") => `<button type="button" class="btn $
 
 /* ----- 전체 작품 ----- */
 const works = { cat: "전체", q: "" };
+const TRADE = () => PROJECTS.filter((p) => p.category !== "기타 연습");
+const OTHER = () => PROJECTS.filter((p) => p.category === "기타 연습");
 function drawWorks() {
-  const cats = ["전체", ...new Set(PROJECTS.map((p) => p.category).sort((a, b) => (a === "기타 연습") - (b === "기타 연습") || a.localeCompare(b, "ko")))];
+  const cats = ["전체", ...new Set(TRADE().map((p) => p.category).sort((a, b) => a.localeCompare(b, "ko")))];
   $("#filters").innerHTML = cats.map((c) => {
-    const n = c === "전체" ? PROJECTS.length : PROJECTS.filter((p) => p.category === c).length;
+    const n = c === "전체" ? TRADE().length : TRADE().filter((p) => p.category === c).length;
     return `<button type="button" data-cat="${esc(c)}" aria-pressed="${c === works.cat}">${esc(catName(c))} <b>${n}</b></button>`;
   }).join("");
   const q = works.q.trim().toLowerCase();
-  const list = PROJECTS.filter((p) => (works.cat === "전체" || p.category === works.cat) &&
+  const list = TRADE().filter((p) => (works.cat === "전체" || p.category === works.cat) &&
     (!q || [p.title, p.titleEn, p.desc, p.descEn, p.category, CATEGORY_EN[p.category]].join(" ").toLowerCase().includes(q)));
   $("#countLine").textContent = en() ? `${list.length}${ui("count")}` : `${list.length}${ui("count")}`;
   $("#grid").innerHTML = list.length ? list.map((p) => `
@@ -800,14 +813,20 @@ function drawWorks() {
       <a class="item-link" href="${esc(p.url)}" target="_blank" rel="noopener">${ui("open")}</a>
     </article>`).join("")
     : `<div class="empty-msg">'${esc(works.q)}'${ui("none")}</div>`;
+  const other = $("#otherWork");
+  if (other) {
+    other.hidden = !SHOW_OTHER || !OTHER().length;
+    other.innerHTML = `<span>${ui("other").replace("{n}", OTHER().length)}</span> ` +
+      OTHER().map((p) => `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(tx(p, "title"))}</a>`).join('<span aria-hidden="true"> · </span>');
+  }
   watchImages($("#grid"));
 }
 
 /* ----- 진행 현황 ----- */
 function drawProgress() {
-  const total = PROJECTS.length, pct = Math.min(total, 100);
+  const total = tradeCount(), pct = Math.min(Math.round(total / GOAL * 100), 100);
   $("#pCount").textContent = total;
-  $("#pTrade").textContent = tradeCount();
+  $$("[data-goal]").forEach((el) => (el.textContent = GOAL));
   const bar = $("#pBar");
   bar.setAttribute("aria-valuenow", String(pct));
   if (!drawProgress.done) {
@@ -833,7 +852,7 @@ function drawInterview() {
 /* ----- 나머지 공통 섹션 ----- */
 function drawCommon() {
   $$("[data-trade]").forEach((el) => (el.textContent = tradeCount()));
-  $$("[data-total]").forEach((el) => (el.textContent = PROJECTS.length));
+  $$("[data-total]").forEach((el) => (el.textContent = tradeCount()));
   if ($("#steps")) $("#steps").innerHTML = STEPS.map((s, i) => `
     <li><span class="step-no">${i + 1}</span><div><h3>${esc(tx(s, "t"))}</h3><p>${esc(tx(s, "d"))}</p><p class="step-ex">${esc(tx(s, "ex"))}</p></div></li>`).join("");
   if ($("#exp")) $("#exp").innerHTML = EXPERIENCE.map((g) => `<div class="exp-group"><h3>${esc(tx(g, "g"))}</h3><ul>${g.items.map((i) => `<li>${esc(pick(i))}</li>`).join("")}</ul></div>`).join("");
@@ -846,6 +865,7 @@ function drawCommon() {
     `<a class="btn btn-line" href="${esc(PROFILE.resume)}" target="_blank" rel="noopener">${ui("cv")}</a>`,
   ].join("");
   $$(".ph-msg").forEach((m) => (m.textContent = ui("photo")));
+  if (typeof cvState !== "undefined" && cvState === "missing") $$(`a[href$="${PROFILE.resume}"]`).forEach((a) => a.classList.add("cv-off"));
   $("#year").textContent = new Date().getFullYear();
 }
 function toast(msg) { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove("show"), 2000); }
@@ -923,7 +943,27 @@ function applyLang(lang) {
 }
 document.addEventListener("click", (e) => { const b = e.target.closest("[data-lang]"); if (b && b.dataset.lang !== LANG) applyLang(b.dataset.lang); });
 
+/* ----- 이력서 PDF 버튼: 파일이 있으면 새 창으로 열고, 없으면 안내 ----- */
+let cvState = "unknown";   // ok | missing | local
+async function checkResume() {
+  if (location.protocol === "file:") { cvState = "local"; return; }
+  try {
+    const r = await fetch(PROFILE.resume, { method: "HEAD", cache: "no-store" });
+    const type = (r.headers.get("content-type") || "").toLowerCase();
+    cvState = r.ok && type.includes("pdf") ? "ok" : "missing";   // 없는 주소에 홈 화면을 돌려주는 경우도 걸러냄
+  } catch { cvState = "missing"; }
+  $$(`a[href$="${PROFILE.resume}"]`).forEach((a) => a.classList.toggle("cv-off", cvState === "missing"));
+}
+document.addEventListener("click", (e) => {
+  const a = e.target.closest(`a[href$="${PROFILE.resume}"]`);
+  if (!a || cvState === "ok") return;
+  if (cvState === "unknown") return;            // 확인 전에는 그대로 열기
+  e.preventDefault();
+  toast(ui(cvState === "local" ? "cvLocal" : "cvMissing"));
+});
+
 function boot(variantDraw) {
+  checkResume();
   drawVariant = variantDraw;
   $("#filters").addEventListener("click", (e) => { const b = e.target.closest("[data-cat]"); if (b) { works.cat = b.dataset.cat; drawWorks(); } });
   $("#q").addEventListener("input", (e) => { works.q = e.target.value; drawWorks(); });
